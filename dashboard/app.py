@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""
-{{TITLE}} · Dashboard Streamlit
-{{DESCRIPTION}}
+"""Open CONSIP · Dashboard Streamlit
+Acquisti pubblici italiani: dati Consip per regione, strumento, impresa.
 """
 
 import streamlit as st
 
 st.set_page_config(
-    page_title="{{TITLE}} · Dashboard",
-    page_icon="{{ICON}}",
+    page_title="Open CONSIP · Dashboard",
+    page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -18,19 +17,22 @@ pages = {
         st.Page("pages/01_Panoramica.py", title="Panoramica", icon="📊", default=True),
     ],
     "Analisi": [
-        st.Page("pages/02_Analisi.py", title="Analisi", icon="📈"),
+        st.Page("pages/02_Gare_ASP.py", title="Gare ASP", icon="🏗️"),
+        st.Page("pages/03_Spesa_Convenzioni.py", title="Spesa Convenzioni", icon="💰"),
+        st.Page("pages/04_Competizione_MePA.py", title="Competizione MePA", icon="📈"),
+        st.Page("pages/05_Imprese.py", title="Imprese", icon="🏢"),
     ],
     "Strumenti": [
-        st.Page("pages/05_SQL.py", title="Query SQL", icon="🧪"),
+        st.Page("pages/06_SQL.py", title="Query SQL", icon="🧪"),
     ],
 }
 
 pg = st.navigation(pages, position="sidebar")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Dati: {{FONTI}}")
+st.sidebar.caption("Dati: dati.consip.it (CKAN, CC BY 4.0)")
 st.sidebar.caption(
-    "Codice: [dataciviclab/{{REPO}}](https://github.com/dataciviclab/{{REPO}})"
+    "Codice: [dataciviclab/open-consip](https://github.com/dataciviclab/open-consip)"
 )
 st.sidebar.caption("[DataCivicLab](https://dataciviclab.org/) · CC BY 4.0")
 

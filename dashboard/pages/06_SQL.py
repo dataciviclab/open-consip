@@ -11,8 +11,8 @@ registry = load_registry(
 
 render_sql_query(
     registry=registry,
-    prefix="{{PREFIX}}/",
-    default_slug="{{SLUG}}",
+    prefix="open-consip/",
+    default_slug="consip_consumi_convenzione",
     title="🧪 Query SQL",
     description="Interroga direttamente i dati. Scrivi SQL su ``clean_input``.",
 )

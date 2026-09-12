@@ -1,4 +1,4 @@
-"""Fonti dati per la dashboard {{TITLE}}.
+"""Fonti dati per la dashboard Open CONSIP.
 
 Wrappa lab_connectors.duckdb.queries con @st.cache_data.
 """
@@ -12,18 +12,19 @@ from lab_connectors.duckdb.queries import (
     query_clean as _query_clean,
 )
 
-PREFIX = "{{PREFIX}}/"
-SLUG = "{{SLUG}}"
-YEARS = list(range({{YEAR_START}}, {{YEAR_END}} + 1))
+PREFIX = "open-consip/"
+YEARS_ALL = [2023, 2024, 2025, 2026]
+YEARS_GARE = [2024, 2025, 2026]
+YEARS_CONSUMI = [2023, 2024, 2025]
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def load_mart(table: str, year: int = {{YEAR_END}}):
+def load_mart(slug: str, table: str, year: int):
     """Carica un singolo mart table da GCS (cached 1h)."""
-    return _load_mart_table(SLUG, table, year, prefix=PREFIX)
+    return _load_mart_table(slug, table, year, prefix=PREFIX)
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def query(sql: str, years: tuple[int, ...] = tuple(YEARS)):
+def query_clean(slug: str, sql: str, years: tuple[int, ...]):
     """Esegue SQL sul clean layer (cached 1h)."""
-    return _query_clean(SLUG, sql, list(years), prefix=PREFIX)
+    return _query_clean(slug, sql, list(years), prefix=PREFIX)
