@@ -1,0 +1,67 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_anac_imprese"
+  source_id: "dataciviclab_composite"
+  tags: [consip, anac, appalti, imprese, compose]
+  category: appalti
+  description: "Compose CONSIP+ANAC: profilo impresa dual-use (P.IVA/CF match). Unisce operatori economici CONSIP con aggiudicatari ANAC."
+  years: [2026]
+  time_coverage:
+    mode: snapshot
+
+# Compose: unisce CONSIP operatori-economici con ANAC mart_imprese su P.IVA/CF.
+# Eseguire prima: toolkit run per consip-operatori-economici e anac (mart_imprese).
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "operatori_consip"
+      type: local_file
+      args:
+        path: "../../out/data/clean/consip_operatori_economici/2026/consip_operatori_economici_2026_clean.parquet"
+        filename: "operatori_consip.parquet"
+      primary: true
+
+support: []
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: config_only
+    mode: latest
+  required_columns:
+    - "partita_iva"
+    - "denominazione"
+    - "ha_consip"
+    - "ha_anac"
+  validate:
+    not_null:
+      - "partita_iva"
+    min_rows: 1
+
+mart:
+  tables:
+    - name: "mart_imprese_dual_use"
+      sql: "sql/mart_imprese_dual_use.sql"
+    - name: "mart_analisi_mercato"
+      sql: "sql/mart_analisi_mercato.sql"
+  required_tables:
+    - mart_imprese_dual_use
+    - mart_analisi_mercato
+  validate:
+    table_rules:
+      mart_imprese_dual_use:
+        min_rows: 1000
+      mart_analisi_mercato:
+        min_rows: 10
+
+duckdb:
+  memory_limit: "4GB"
+
+validation:
+  fail_on_error: true
+
+output:
+  artifacts: "standard"

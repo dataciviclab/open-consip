@@ -2,41 +2,33 @@
 
 import streamlit as st
 import plotly.express as px
-from lab_connectors.formatters import fmt_num, fmt_eur, fmt_pct
+from lab_connectors.formatters import fmt_num, fmt_eur
 from sources import load_mart, YEARS_GARE, YEARS_CONSUMI
 
 st.title("📊 Open CONSIP — Panoramica")
 
-# ── Filtri ─────────────────────────────────────────────────────────
-col1, col2 = st.columns(2)
-with col1:
-    year_gare = st.selectbox("Anno gare", YEARS_GARE, index=len(YEARS_GARE) - 1)
-with col2:
-    year_spesa = st.selectbox("Anno spesa", YEARS_CONSUMI, index=len(YEARS_CONSUMI) - 1)
+year = st.selectbox("Anno", YEARS_GARE, index=len(YEARS_GARE) - 1)
 
-# ── KPI principali ─────────────────────────────────────────────────
-df_gare = load_mart("consip_gare_asp", "mart_gare_per_territorio", year_gare)
-df_spesa = load_mart("consip_consumi_convenzione", "mart_spesa_per_territorio", year_spesa)
-df_imprese = load_mart("consip_operatori_economici", "mart_imprese_per_territorio", year_gare)
-df_mePA = load_mart("consip_rdo_td_stipulate", "mart_competizione_mepa", year_gare)
+df_gare = load_mart("consip_gare_asp", "mart_gare_per_territorio", year)
+df_spesa = load_mart("consip_consumi_convenzione", "mart_spesa_per_territorio", year)
+df_imprese = load_mart("consip_operatori_economici", "mart_imprese_per_territorio", year)
+df_mePA = load_mart("consip_ordini_mepa", "mart_ordini_mepa_per_bene", year)
+df_conv = load_mart("consip_ordini_convenzione", "mart_spesa_per_convenzione", year)
 
+# ── KPI ────────────────────────────────────────────────────────────
 k1, k2, k3, k4 = st.columns(4)
-
 with k1:
+    spesa_mepa = float(df_mePA["valore_ordini"].sum()) if not df_mePA.empty else 0
+    st.metric("Spesa MePA", fmt_eur(spesa_mepa))
+with k2:
+    spesa_conv = float(df_conv["importo_totale"].sum()) if not df_conv.empty else 0
+    st.metric("Spesa Convenzioni", fmt_eur(spesa_conv))
+with k3:
     n_gare = int(df_gare["n_gare"].sum()) if not df_gare.empty else 0
     st.metric("Gare ASP", fmt_num(n_gare))
-
-with k2:
-    val_agg = float(df_gare["valore_aggiudicato_totale"].sum()) if not df_gare.empty else 0
-    st.metric("Valore aggiudicato", fmt_eur(val_agg))
-
-with k3:
+with k4:
     n_imprese = int(df_imprese["n_imprese"].sum()) if not df_imprese.empty else 0
     st.metric("Imprese attive", fmt_num(n_imprese))
-
-with k4:
-    spesa = float(df_spesa["spesa_totale"].sum()) if not df_spesa.empty else 0
-    st.metric("Spesa utility", fmt_eur(spesa))
 
 st.divider()
 
@@ -44,32 +36,33 @@ st.divider()
 col_left, col_right = st.columns(2)
 
 with col_left:
+    st.subheader("Spesa per strumento")
+    data = []
+    if spesa_mepa > 0:
+        data.append({"Strumento": "MePA", "Spesa": spesa_mepa})
+    if spesa_conv > 0:
+        data.append({"Strumento": "Convenzioni", "Spesa": spesa_conv})
+    spesa_util = float(df_spesa["spesa_totale"].sum()) if not df_spesa.empty else 0
+    if spesa_util > 0:
+        data.append({"Strumento": "Utility", "Spesa": spesa_util})
+    if data:
+        import pandas as pd
+        df_bar = pd.DataFrame(data)
+        fig = px.pie(df_bar, names="Strumento", values="Spesa",
+                     title="Composizione spesa per strumento")
+        fig.update_layout(height=350, margin=dict(l=0, r=0, t=30, b=0))
+        st.plotly_chart(fig, width="stretch")
+
+with col_right:
     st.subheader("Gare ASP per regione")
     if not df_gare.empty:
-        df_plot = df_gare.groupby("regione_pa", as_index=False).agg(
-            n_gare=("n_gare", "sum"),
+        df_plot = df_gare.dropna(subset=["regione_pa"]).groupby("regione_pa", as_index=False).agg(
             valore=("valore_aggiudicato_totale", "sum"),
         ).sort_values("valore", ascending=True).tail(10)
         fig = px.bar(df_plot, x="valore", y="regione_pa", orientation="h",
                      title="Top 10 regioni per valore aggiudicato",
                      labels={"valore": "Valore (€)", "regione_pa": ""})
-        fig.update_layout(height=400, margin=dict(l=0, r=0, t=30, b=0))
+        fig.update_layout(height=350, margin=dict(l=0, r=0, t=30, b=0))
         st.plotly_chart(fig, width="stretch")
-    else:
-        st.info("Nessun dato gare disponibile.")
-
-with col_right:
-    st.subheader("Spesa utility per regione")
-    if not df_spesa.empty:
-        df_plot = df_spesa.groupby("regione_pa", as_index=False).agg(
-            spesa=("spesa_totale", "sum"),
-        ).sort_values("spesa", ascending=True).tail(10)
-        fig = px.bar(df_plot, x="spesa", y="regione_pa", orientation="h",
-                     title="Top 10 regioni per spesa utility",
-                     labels={"spesa": "Spesa (€)", "regione_pa": ""})
-        fig.update_layout(height=400, margin=dict(l=0, r=0, t=30, b=0))
-        st.plotly_chart(fig, width="stretch")
-    else:
-        st.info("Nessun dato spesa disponibile.")
 
 st.caption("Dati: dati.consip.it · CC BY 4.0")

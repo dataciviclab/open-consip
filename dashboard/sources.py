@@ -6,6 +6,7 @@ Wrappa lab_connectors.duckdb.queries con @st.cache_data.
 from __future__ import annotations
 
 import streamlit as st
+import pandas as pd
 
 from lab_connectors.duckdb.queries import (
     load_mart_table as _load_mart_table,
@@ -20,8 +21,12 @@ YEARS_CONSUMI = [2023, 2024, 2025]
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_mart(slug: str, table: str, year: int):
-    """Carica un singolo mart table da GCS (cached 1h)."""
-    return _load_mart_table(slug, table, year, prefix=PREFIX)
+    """Carica un singolo mart table da GCS (cached 1h).
+    Ritorna DataFrame vuoto se l'anno non esiste per quel dataset."""
+    try:
+        return _load_mart_table(slug, table, year, prefix=PREFIX)
+    except Exception:
+        return pd.DataFrame()
 
 
 @st.cache_data(ttl=3600, show_spinner=False)

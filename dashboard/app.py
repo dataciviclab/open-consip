@@ -17,20 +17,21 @@ pages = {
         st.Page("pages/01_Panoramica.py", title="Panoramica", icon="📊", default=True),
     ],
     "Analisi": [
-        st.Page("pages/02_Gare_ASP.py", title="Gare ASP", icon="🏗️"),
-        st.Page("pages/03_Spesa_Convenzioni.py", title="Spesa Convenzioni", icon="💰"),
+        st.Page("pages/02_Spesa_Strumento.py", title="Spesa per Strumento", icon="💰"),
+        st.Page("pages/03_Mercato_PA.py", title="Mercato PA", icon="🔄"),
         st.Page("pages/04_Competizione_MePA.py", title="Competizione MePA", icon="📈"),
         st.Page("pages/05_Imprese.py", title="Imprese", icon="🏢"),
+        st.Page("pages/06_Cataloghi.py", title="Cosa si compra", icon="🛒"),
     ],
     "Strumenti": [
-        st.Page("pages/06_SQL.py", title="Query SQL", icon="🧪"),
+        st.Page("pages/07_SQL.py", title="Query SQL", icon="🧪"),
     ],
 }
 
 pg = st.navigation(pages, position="sidebar")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Dati: dati.consip.it (CKAN, CC BY 4.0)")
+st.sidebar.caption("Dati: dati.consip.it + datiuslavoro.giustizia.it (CC BY 4.0)")
 st.sidebar.caption(
     "Codice: [dataciviclab/open-consip](https://github.com/dataciviclab/open-consip)"
 )
