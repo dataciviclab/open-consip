@@ -1,0 +1,64 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_cataloghi"
+  source_id: "consip_open_data"
+  tags: [finanza-pubblica, consip, cataloghi, prodotti, cpv]
+  category: finanza-pubblica
+  years: [2024, 2025, 2026]
+  time_coverage: {start_year: 2024, end_year: 2026}
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "consip_cataloghi_2024"
+      type: "http_file"
+      year: 2024
+      args:
+        url: "https://dati.consip.it/download/dataset/cataloghi2024.csv"
+        filename: "cataloghi2024.csv"
+      primary: true
+    - name: "consip_cataloghi_2025"
+      type: "http_file"
+      year: 2025
+      args:
+        url: "https://dati.consip.it/download/dataset/cataloghi2025.csv"
+        filename: "cataloghi2025.csv"
+      primary: true
+    - name: "consip_cataloghi_2026"
+      type: "http_file"
+      year: 2026
+      args:
+        url: "https://dati.consip.it/download/dataset/cataloghi2026.csv"
+        filename: "cataloghi2026.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: largest
+    delim: ","
+    encoding: "utf-8"
+    header: true
+    ignore_errors: true
+  required_columns: [tipo_strumento, prodotto, codice_cpv, descrizione_cpv, categoria_merceologica]
+  validate:
+    min_rows: 10000
+    not_null: [tipo_strumento]
+
+mart:
+  tables:
+    - name: "mart_cataloghi_per_categoria"
+      sql: "sql/mart_cataloghi_per_categoria.sql"
+  required_tables: [mart_cataloghi_per_categoria]
+  validate:
+    table_rules:
+      mart_cataloghi_per_categoria:
+        required_columns: [tipo_strumento, categoria_merceologica, n_prodotti]
+        primary_key: [tipo_strumento, categoria_merceologica]
+        min_rows: 5
+
+validation:
+  fail_on_error: true

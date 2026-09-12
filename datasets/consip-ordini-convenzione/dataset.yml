@@ -56,7 +56,7 @@ mart:
   validate:
     table_rules:
       mart_spesa_per_convenzione:
-        required_columns: [anno_riferimento, convenzione, importo_totale, n_ordini_totali]
+        required_columns: [anno_riferimento, convenzione, importo_totale, n_righe]
         primary_key: [anno_riferimento, convenzione]
         min_rows: 5
 
