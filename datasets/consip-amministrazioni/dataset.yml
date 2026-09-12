@@ -1,0 +1,63 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_amministrazioni"
+  source_id: "consip_open_data"
+  tags: [finanza-pubblica, consip, pa, anagrafica, support]
+  category: pa
+  years: [2024, 2025, 2026]
+  time_coverage: {start_year: 2024, end_year: 2026}
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "consip_amministrazioni_2024"
+      type: "http_file"
+      year: 2024
+      args:
+        url: "https://dati.consip.it/download/dataset/amministrazioni2024.csv"
+        filename: "amministrazioni2024.csv"
+      primary: true
+    - name: "consip_amministrazioni_2025"
+      type: "http_file"
+      year: 2025
+      args:
+        url: "https://dati.consip.it/download/dataset/amministrazioni2025.csv"
+        filename: "amministrazioni2025.csv"
+      primary: true
+    - name: "consip_amministrazioni_2026"
+      type: "http_file"
+      year: 2026
+      args:
+        url: "https://dati.consip.it/download/dataset/amministrazioni2026.csv"
+        filename: "amministrazioni2026.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: largest
+    delim: ","
+    encoding: "latin-1"
+    header: true
+  required_columns: [identificativo_amministrazione, identificativo_ipa, tipologia_amministrazione, codice_fiscale, denominazione, regione, provincia, comune, latitudine, longitudine, numero_po_attivi]
+  validate:
+    min_rows: 1000
+    not_null: [identificativo_amministrazione, denominazione]
+
+mart:
+  tables:
+    - name: "mart_pa_per_territorio"
+      sql: "sql/mart_pa_per_territorio.sql"
+  required_tables: [mart_pa_per_territorio]
+  validate:
+    table_rules:
+      mart_pa_per_territorio:
+        required_columns: [anno_riferimento, regione, tipologia_amministrazione, n_pa, n_po_totali]
+        primary_key: [anno_riferimento, regione, tipologia_amministrazione]
+        min_rows: 5
+
+validation:
+  fail_on_error: true

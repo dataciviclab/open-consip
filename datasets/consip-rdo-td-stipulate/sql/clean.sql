@@ -1,0 +1,20 @@
+select
+  {year}::INTEGER as anno_riferimento,
+  normalize_string("Tipologia_Amministrazione") as tipologia_amministrazione,
+  normalize_string("Regione_Fornitore") as regione_fornitore,
+  normalize_string("Regione_PA") as regione_pa,
+  normalize_string("Provincia_PA") as provincia_pa,
+  normalize_string("Sigla_provincia_PA") as sigla_provincia_pa,
+  normalize_string("Tipo_Negoziazione") as tipo_negoziazione,
+  cast_bigint("N_negoziazioni_stipulate") as n_negoziazioni_stipulate,
+  cast_bigint("N_Contratti_Stipulati") as n_contratti_stipulati,
+  normalize_italian_integer("Valore_Base_Asta") as valore_base_asta,
+  normalize_italian_number("Perc_negoziazioni_base_asta_valorizzata") as perc_negoziazioni_base_asta_valorizzata,
+  normalize_italian_integer("Valore_contratti_stipulati") as valore_contratti_stipulati,
+  normalize_italian_number("N_Medio_Fornitori_Partecipanti") as n_medio_fornitori_partecipanti,
+  cast_bigint("N_Fornitori_con_contratti_stipulati") as n_fornitori_con_contratti_stipulati,
+  cast_bigint("N_PA_Appaltanti") as n_pa_appaltanti,
+  cast_bigint("N_PO") as n_po,
+  normalize_italian_number("Durata_media_negoziazione") as durata_media_negoziazione,
+  normalize_italian_number("Tempi_Medi_Stipula") as tempi_medi_stipula
+from raw_input

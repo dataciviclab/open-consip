@@ -1,0 +1,69 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_bandi_e_gare"
+  source_id: "consip_open_data"
+  tags: [finanza-pubblica, consip, bandi, gare, appalti]
+  category: appalti
+  years: [2024, 2025, 2026]
+  time_coverage: {start_year: 2024, end_year: 2026}
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "consip_bandi_e_gare_2024"
+      type: "http_file"
+      year: 2024
+      args:
+        url: "https://dati.consip.it/download/dataset/bandiegare2024.csv"
+        filename: "bandiegare2024.csv"
+      primary: true
+    - name: "consip_bandi_e_gare_2025"
+      type: "http_file"
+      year: 2025
+      args:
+        url: "https://dati.consip.it/download/dataset/bandiegare2025.csv"
+        filename: "bandiegare2025.csv"
+      primary: true
+    - name: "consip_bandi_e_gare_2026"
+      type: "http_file"
+      year: 2026
+      args:
+        url: "https://dati.consip.it/download/dataset/bandiegare2026.csv"
+        filename: "bandiegare2026.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: largest
+    delim: ","
+    encoding: "latin-1"
+    header: true
+  required_columns: [anno_riferimento, denominazione_bando, denominazione_lotto, tipo_strumento, tipo_procedura, criterio_aggiudicazione, data_pubblicazione, base_asta]
+  validate:
+    min_rows: 50
+    not_null: [anno_riferimento, denominazione_bando, tipo_strumento]
+
+mart:
+  tables:
+    - name: "mart_bandi_per_strumento"
+      sql: "sql/mart_bandi_per_strumento.sql"
+    - name: "mart_competizione_strumento"
+      sql: "sql/mart_competizione_strumento.sql"
+  required_tables: [mart_bandi_per_strumento, mart_competizione_strumento]
+  validate:
+    table_rules:
+      mart_bandi_per_strumento:
+        required_columns: [anno_riferimento, tipo_strumento, criterio_aggiudicazione, n_lotti, base_asta_totale]
+        primary_key: [anno_riferimento, tipo_strumento, criterio_aggiudicazione]
+        min_rows: 5
+      mart_competizione_strumento:
+        required_columns: [anno_riferimento, tipo_strumento, criterio_aggiudicazione, n_lotti, erosione_media]
+        primary_key: [anno_riferimento, tipo_strumento, criterio_aggiudicazione]
+        min_rows: 5
+
+validation:
+  fail_on_error: true

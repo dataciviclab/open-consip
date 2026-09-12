@@ -1,0 +1,63 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_rdo_td_stipulate"
+  source_id: "consip_open_data"
+  tags: [finanza-pubblica, consip, mepa, rdo, contratti, competizione]
+  category: appalti
+  years: [2024, 2025, 2026]
+  time_coverage: {start_year: 2024, end_year: 2026}
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "consip_rdo_td_stipulate_2024"
+      type: "http_file"
+      year: 2024
+      args:
+        url: "https://dati.consip.it/download/dataset/rdo-td-stipulate-mepa-2024.csv"
+        filename: "rdo-td-stipulate-mepa-2024.csv"
+      primary: true
+    - name: "consip_rdo_td_stipulate_2025"
+      type: "http_file"
+      year: 2025
+      args:
+        url: "https://dati.consip.it/download/dataset/rdo-td-stipulate-mepa-2025.csv"
+        filename: "rdo-td-stipulate-mepa-2025.csv"
+      primary: true
+    - name: "consip_rdo_td_stipulate_2026"
+      type: "http_file"
+      year: 2026
+      args:
+        url: "https://dati.consip.it/download/dataset/rdo-td-stipulate-mepa-2026.csv"
+        filename: "rdo-td-stipulate-mepa-2026.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: largest
+    delim: ","
+    encoding: "utf-8"
+    header: true
+  required_columns: [anno_riferimento, tipologia_amministrazione, regione_pa, provincia_pa, tipo_negoziazione, n_contratti_stipulati, valore_contratti_stipulati, n_medio_fornitori_partecipanti, durata_media_negoziazione, tempi_medi_stipula]
+  validate:
+    min_rows: 1000
+    not_null: [anno_riferimento]
+
+mart:
+  tables:
+    - name: "mart_competizione_mepa"
+      sql: "sql/mart_competizione_mepa.sql"
+  required_tables: [mart_competizione_mepa]
+  validate:
+    table_rules:
+      mart_competizione_mepa:
+        required_columns: [anno_riferimento, regione_pa, tipo_negoziazione, n_contratti, valore_contratti, fornitori_medi]
+        primary_key: [anno_riferimento, regione_pa, tipo_negoziazione]
+        min_rows: 5
+
+validation:
+  fail_on_error: true

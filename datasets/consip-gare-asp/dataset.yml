@@ -1,0 +1,71 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_gare_asp"
+  source_id: "consip_open_data"
+  tags: [finanza-pubblica, consip, gare, appalti, asp, geolocalizzato]
+  category: appalti
+  years: [2024, 2025, 2026]
+  time_coverage: {start_year: 2024, end_year: 2026}
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "consip_gare_asp_2024"
+      type: "http_file"
+      year: 2024
+      args:
+        url: "https://dati.consip.it/download/dataset/gareasp2024.csv"
+        filename: "gareasp2024.csv"
+      primary: true
+    - name: "consip_gare_asp_2025"
+      type: "http_file"
+      year: 2025
+      args:
+        url: "https://dati.consip.it/download/dataset/gareasp2025.csv"
+        filename: "gareasp2025.csv"
+      primary: true
+    - name: "consip_gare_asp_2026"
+      type: "http_file"
+      year: 2026
+      args:
+        url: "https://dati.consip.it/download/dataset/gareasp2026.csv"
+        filename: "gareasp2026.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: largest
+    delim: ","
+    encoding: "latin-1"
+    header: true
+    ignore_errors: true
+    null_padding: true
+  required_columns: [anno_riferimento, denominazione_amministrazione, denominazione_gara, stato_gara, regione_pa, provincia_pa, sigla_prov_pa, data_pubblicazione, base_asta, valore_aggiudicato]
+  validate:
+    min_rows: 50
+    not_null: [anno_riferimento]
+
+mart:
+  tables:
+    - name: "mart_gare_per_territorio"
+      sql: "sql/mart_gare_per_territorio.sql"
+    - name: "mart_esito_gare_provincia"
+      sql: "sql/mart_esito_gare_provincia.sql"
+  required_tables: [mart_gare_per_territorio, mart_esito_gare_provincia]
+  validate:
+    table_rules:
+      mart_gare_per_territorio:
+        required_columns: [anno_riferimento, regione_pa, provincia_pa, stato_gara, n_gare, base_asta_totale]
+        primary_key: [anno_riferimento, regione_pa, provincia_pa, stato_gara]
+        min_rows: 5
+      mart_esito_gare_provincia:
+        required_columns: [anno_riferimento, regione_pa, provincia_pa, stato_gara, n_gare, tasso_aggiudicazione_pct]
+        primary_key: [anno_riferimento, regione_pa, provincia_pa, stato_gara]
+        min_rows: 5
+
+validation:
+  fail_on_error: true

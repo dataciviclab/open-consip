@@ -1,0 +1,65 @@
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "consip_partecipazioni"
+  source_id: "consip_open_data"
+  tags: [finanza-pubblica, consip, gare, imprese, partecipazioni]
+  category: appalti
+  years: [2024, 2025, 2026]
+  time_coverage: {start_year: 2024, end_year: 2026}
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "consip_partecipazioni_2024"
+      type: "http_file"
+      year: 2024
+      args:
+        url: "https://dati.consip.it/download/dataset/partecipazioni2024.csv"
+        filename: "partecipazioni2024.csv"
+      primary: true
+    - name: "consip_partecipazioni_2025"
+      type: "http_file"
+      year: 2025
+      args:
+        url: "https://dati.consip.it/download/dataset/partecipazioni2025.csv"
+        filename: "partecipazioni2025.csv"
+      primary: true
+    - name: "consip_partecipazioni_2026"
+      type: "http_file"
+      year: 2026
+      args:
+        url: "https://dati.consip.it/download/dataset/partecipazioni2026.csv"
+        filename: "partecipazioni2026.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: largest
+    delim: ","
+    encoding: "utf-8"
+    header: true
+    ignore_errors: true
+    parallel: false
+  required_columns: [denominazione_iniziativa, denominazione_lotto, identificativo_lotto, tipo_strumento, partita_iva, ragione_sociale, forma_partecipazione, esito_partecipazione]
+  validate:
+    min_rows: 10000
+    not_null: [anno_riferimento]
+
+mart:
+  tables:
+    - name: "mart_vincitori_per_strumento"
+      sql: "sql/mart_vincitori_per_strumento.sql"
+  required_tables: [mart_vincitori_per_strumento]
+  validate:
+    table_rules:
+      mart_vincitori_per_strumento:
+        required_columns: [anno_riferimento, tipo_strumento, esito_partecipazione, n_partecipazioni, n_imprese_distinte]
+        primary_key: [anno_riferimento, tipo_strumento, esito_partecipazione]
+        min_rows: 3
+
+validation:
+  fail_on_error: true
