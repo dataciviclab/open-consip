@@ -31,7 +31,6 @@ li trasforma in mart analitici e li rende interrogabili via dashboard Streamlit.
 | `consip-partecipazioni` | Imprese partecipanti alle iniziative | 2024-2026 | 1 |
 | `consip-rdotdstipulate` | Richieste di offerta/trattative dirette | 2024-2026 | 1 |
 | `consip-amministrazioni` | Anagrafica PA con coordinate | 2024-2026 | 1 |
-| `consip-composto` | Riepilogo cross-dataset | 2024-2026 | 1 |
 
 ### Mart analitici (12 totali)
 
@@ -107,8 +106,7 @@ open-consip/
 │   ├── consip-ordiniconvenzione/
 │   ├── consip-partecipazioni/
 │   ├── consip-rdotdstipulate/
-│   ├── consip-amministrazioni/
-│   └── consip-composto/
+│   └── consip-amministrazioni/
 ├── compose/
 │   └── consip-anac-imprese/    # cross-consip-anac (dual-use)
 ├── support/                    # anagrafiche condivise
