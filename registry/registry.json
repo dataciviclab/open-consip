@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "repo": "consip",
-  "source_repo": "consip",
-  "updated_at": "2026-09-11",
+  "repo": "open-consip",
+  "source_repo": "dataciviclab/open-consip",
+  "updated_at": "2026-09-19",
   "datasets": [
     {
       "slug": "consip_amministrazioni",
@@ -103,7 +103,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_amministrazioni/*/consip_amministrazioni_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_amministrazioni/*/consip_amministrazioni_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
@@ -314,13 +314,122 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_bandi_e_gare/*/consip_bandi_e_gare_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_bandi_e_gare/*/consip_bandi_e_gare_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
       "mart_refs": [
         "consip_bandi_e_gare__mart_bandi_per_strumento",
         "consip_bandi_e_gare__mart_competizione_strumento"
+      ]
+    },
+    {
+      "slug": "consip_cataloghi",
+      "name": "Consip Cataloghi",
+      "description": "",
+      "source": "",
+      "source_id": "consip_open_data",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "tags": [
+        "finanza-pubblica",
+        "consip",
+        "cataloghi",
+        "prodotti",
+        "cpv"
+      ],
+      "category": "finanza-pubblica",
+      "columns": [
+        {
+          "name": "denominazione_iniziativa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "denominazione_lotto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "identificativo_lotto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_strumento",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "prodotto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "codice_cpv",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "cpv_code"
+        },
+        {
+          "name": "descrizione_cpv",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_prodotto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "categoria_merceologica",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "descrizione_dettaglio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "principale_accessorio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "articolo_disp_mese",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "articolo_disp_anno",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/open-consip/consip_cataloghi/*/consip_cataloghi_*_clean.parquet",
+        "multi_file": true
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "consip_cataloghi__mart_cataloghi_per_categoria"
       ]
     },
     {
@@ -593,7 +702,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_consumi_convenzione/*/consip_consumi_convenzione_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_consumi_convenzione/*/consip_consumi_convenzione_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
@@ -775,7 +884,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_gare_asp/*/consip_gare_asp_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_gare_asp/*/consip_gare_asp_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
@@ -897,7 +1006,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_operatori_economici/*/consip_operatori_economici_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_operatori_economici/*/consip_operatori_economici_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
@@ -1027,12 +1136,142 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_ordini_convenzione/*/consip_ordini_convenzione_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_ordini_convenzione/*/consip_ordini_convenzione_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
       "mart_refs": [
         "consip_ordini_convenzione__mart_spesa_per_convenzione"
+      ]
+    },
+    {
+      "slug": "consip_ordini_mepa",
+      "name": "Consip Ordini Mepa",
+      "description": "",
+      "source": "",
+      "source_id": "consip_open_data",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "tags": [
+        "finanza-pubblica",
+        "consip",
+        "ordini",
+        "mepa",
+        "spesa"
+      ],
+      "category": "finanza-pubblica",
+      "columns": [
+        {
+          "name": "anno_riferimento",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "tipologia_amministrazione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "regione_pa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "provincia_pa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sigla_provincia_pa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "province_code"
+        },
+        {
+          "name": "regione_fornitore",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "bando_mepa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "categoria_abilitazione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "bene_servizio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "codice_cpv",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "cpv_code"
+        },
+        {
+          "name": "descrizione_cpv",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "n_ordini",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "valore_ordini",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "n_pa",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "n_fornitori",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "n_po",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/open-consip/consip_ordini_mepa/*/consip_ordini_mepa_*_clean.parquet",
+        "multi_file": true
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "consip_ordini_mepa__mart_ordini_mepa_per_bene",
+        "consip_ordini_mepa__mart_ordini_mepa_per_regione"
       ]
     },
     {
@@ -1137,7 +1376,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_partecipazioni/*/consip_partecipazioni_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_partecipazioni/*/consip_partecipazioni_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
@@ -1278,7 +1517,7 @@
       ],
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_rdo_td_stipulate/*/consip_rdo_td_stipulate_*_clean.parquet",
+        "path": "gs://dataciviclab-clean/open-consip/consip_rdo_td_stipulate/*/consip_rdo_td_stipulate_*_clean.parquet",
         "multi_file": true
       },
       "stage": "incubating",
@@ -1294,7 +1533,27 @@
       "table": "mart_pa_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_amministrazioni/2026/mart_pa_per_territorio.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_amministrazioni/2026/mart_pa_per_territorio.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "consip_anac_imprese__mart_analisi_mercato",
+      "dataset": "consip_anac_imprese",
+      "table": "mart_analisi_mercato",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/open-consip/consip_anac_imprese/2026/mart_analisi_mercato.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "consip_anac_imprese__mart_imprese_dual_use",
+      "dataset": "consip_anac_imprese",
+      "table": "mart_imprese_dual_use",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/open-consip/consip_anac_imprese/2026/mart_imprese_dual_use.parquet",
         "multi_file": false
       }
     },
@@ -1304,7 +1563,7 @@
       "table": "mart_bandi_per_strumento",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_bandi_e_gare/2026/mart_bandi_per_strumento.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/2026/mart_bandi_per_strumento.parquet",
         "multi_file": false
       }
     },
@@ -1314,17 +1573,17 @@
       "table": "mart_competizione_strumento",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_bandi_e_gare/2026/mart_competizione_strumento.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/2026/mart_competizione_strumento.parquet",
         "multi_file": false
       }
     },
     {
-      "slug": "consip_composto__mart_riepilogo",
-      "dataset": "consip_composto",
-      "table": "mart_riepilogo",
+      "slug": "consip_cataloghi__mart_cataloghi_per_categoria",
+      "dataset": "consip_cataloghi",
+      "table": "mart_cataloghi_per_categoria",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_composto/2026/mart_riepilogo.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_cataloghi/2026/mart_cataloghi_per_categoria.parquet",
         "multi_file": false
       }
     },
@@ -1334,7 +1593,7 @@
       "table": "mart_spesa_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_consumi_convenzione/2025/mart_spesa_per_territorio.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_consumi_convenzione/2025/mart_spesa_per_territorio.parquet",
         "multi_file": false
       }
     },
@@ -1344,7 +1603,7 @@
       "table": "mart_esito_gare_provincia",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_gare_asp/2026/mart_esito_gare_provincia.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/2026/mart_esito_gare_provincia.parquet",
         "multi_file": false
       }
     },
@@ -1354,7 +1613,7 @@
       "table": "mart_gare_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_gare_asp/2026/mart_gare_per_territorio.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/2026/mart_gare_per_territorio.parquet",
         "multi_file": false
       }
     },
@@ -1364,7 +1623,7 @@
       "table": "mart_concentrazione_imprese",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_operatori_economici/2026/mart_concentrazione_imprese.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/2026/mart_concentrazione_imprese.parquet",
         "multi_file": false
       }
     },
@@ -1374,7 +1633,7 @@
       "table": "mart_imprese_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_operatori_economici/2026/mart_imprese_per_territorio.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/2026/mart_imprese_per_territorio.parquet",
         "multi_file": false
       }
     },
@@ -1384,7 +1643,27 @@
       "table": "mart_spesa_per_convenzione",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_ordini_convenzione/2026/mart_spesa_per_convenzione.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_convenzione/2026/mart_spesa_per_convenzione.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "consip_ordini_mepa__mart_ordini_mepa_per_bene",
+      "dataset": "consip_ordini_mepa",
+      "table": "mart_ordini_mepa_per_bene",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/2026/mart_ordini_mepa_per_bene.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "consip_ordini_mepa__mart_ordini_mepa_per_regione",
+      "dataset": "consip_ordini_mepa",
+      "table": "mart_ordini_mepa_per_regione",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/2026/mart_ordini_mepa_per_regione.parquet",
         "multi_file": false
       }
     },
@@ -1394,7 +1673,7 @@
       "table": "mart_vincitori_per_strumento",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_partecipazioni/2026/mart_vincitori_per_strumento.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_partecipazioni/2026/mart_vincitori_per_strumento.parquet",
         "multi_file": false
       }
     },
@@ -1404,12 +1683,20 @@
       "table": "mart_competizione_mepa",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open_consip/consip_rdo_td_stipulate/2026/mart_competizione_mepa.parquet",
+        "path": "gs://dataciviclab-mart/open-consip/consip_rdo_td_stipulate/2026/mart_competizione_mepa.parquet",
         "multi_file": false
       }
     }
   ],
   "signals": [
+    {
+      "id": "compose:consip_anac_imprese",
+      "source_id": "dataciviclab_composite",
+      "status": "ok",
+      "label": "consip_anac_imprese",
+      "detail": "anno 2026 — mart: si",
+      "action": ""
+    },
     {
       "id": "consip_amministrazioni",
       "source_id": "consip_open_data",
@@ -1418,7 +1705,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T220201Z_9fa99c93",
+        "run_id": "20260919T142154Z_161be762",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1434,11 +1721,11 @@
         "output_bytes": {
           "raw": 4022935,
           "clean": 891179,
-          "mart": 9631
+          "mart": 9610
         },
-        "started_at": "2026-09-11T22:02:01.647361+00:00",
-        "finished_at": "2026-09-11T22:02:10.161119+00:00",
-        "duration_seconds": 8.514
+        "started_at": "2026-09-19T14:21:54.467433+00:00",
+        "finished_at": "2026-09-19T14:21:59.461634+00:00",
+        "duration_seconds": 4.994
       }
     },
     {
@@ -1449,7 +1736,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T201718Z_9c5ae2f7",
+        "run_id": "20260919T142210Z_957a871c",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1465,41 +1752,42 @@
         "output_bytes": {
           "raw": 524902,
           "clean": 65311,
-          "mart": 3344
+          "mart": 3345
         },
-        "started_at": "2026-09-11T20:17:18.119128+00:00",
-        "finished_at": "2026-09-11T20:17:21.449360+00:00",
-        "duration_seconds": 3.33
+        "started_at": "2026-09-19T14:22:10.983279+00:00",
+        "finished_at": "2026-09-19T14:22:13.346088+00:00",
+        "duration_seconds": 2.363
       }
     },
     {
-      "id": "consip_composto",
-      "source_id": "dataciviclab_composite",
+      "id": "consip_cataloghi",
+      "source_id": "consip_open_data",
       "status": "ok",
-      "label": "consip_composto",
+      "label": "consip_cataloghi",
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T223040Z_9072c72b",
+        "run_id": "20260919T142659Z_08e36fd4",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
           "raw": 100,
-          "clean": 95,
+          "clean": 100,
           "mart": 100
         },
         "output_rows": {
-          "clean": 23,
-          "mart": 23
+          "raw": 272156,
+          "clean": 244660,
+          "mart": 25
         },
         "output_bytes": {
-          "raw": 1060334,
-          "clean": 5856,
-          "mart": 5479
+          "raw": 61401060,
+          "clean": 111861,
+          "mart": 1746
         },
-        "started_at": "2026-09-11T22:30:40.912666+00:00",
-        "finished_at": "2026-09-11T22:30:41.508282+00:00",
-        "duration_seconds": 0.596
+        "started_at": "2026-09-19T14:26:59.718691+00:00",
+        "finished_at": "2026-09-19T14:27:59.434370+00:00",
+        "duration_seconds": 59.716
       }
     },
     {
@@ -1510,7 +1798,7 @@
       "detail": "anni 2023-2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T201731Z_2d9a6484",
+        "run_id": "20260919T142808Z_1eb2dab0",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1526,11 +1814,11 @@
         "output_bytes": {
           "raw": 1096932,
           "clean": 79910,
-          "mart": 38063
+          "mart": 38317
         },
-        "started_at": "2026-09-11T20:17:31.821390+00:00",
-        "finished_at": "2026-09-11T20:17:33.700640+00:00",
-        "duration_seconds": 1.879
+        "started_at": "2026-09-19T14:28:08.715480+00:00",
+        "finished_at": "2026-09-19T14:28:10.231926+00:00",
+        "duration_seconds": 1.516
       }
     },
     {
@@ -1541,7 +1829,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T201818Z_8dd59fe4",
+        "run_id": "20260919T142842Z_f7713e3a",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1557,11 +1845,11 @@
         "output_bytes": {
           "raw": 12865324,
           "clean": 1405824,
-          "mart": 22631
+          "mart": 22639
         },
-        "started_at": "2026-09-11T20:18:18.057441+00:00",
-        "finished_at": "2026-09-11T20:18:47.106397+00:00",
-        "duration_seconds": 29.049
+        "started_at": "2026-09-19T14:28:42.747148+00:00",
+        "finished_at": "2026-09-19T14:28:59.916569+00:00",
+        "duration_seconds": 17.169
       }
     },
     {
@@ -1572,7 +1860,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T202403Z_a19daabd",
+        "run_id": "20260919T143058Z_5d2d9c8c",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1588,11 +1876,11 @@
         "output_bytes": {
           "raw": 56925253,
           "clean": 12001355,
-          "mart": 23499
+          "mart": 23426
         },
-        "started_at": "2026-09-11T20:24:03.133772+00:00",
-        "finished_at": "2026-09-11T20:25:09.991240+00:00",
-        "duration_seconds": 66.857
+        "started_at": "2026-09-19T14:30:58.108505+00:00",
+        "finished_at": "2026-09-19T14:32:00.856825+00:00",
+        "duration_seconds": 62.748
       }
     },
     {
@@ -1603,7 +1891,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T212954Z_8f648960",
+        "run_id": "20260919T143217Z_5426ad5e",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1619,11 +1907,42 @@
         "output_bytes": {
           "raw": 2269724,
           "clean": 73738,
-          "mart": 1642
+          "mart": 1656
         },
-        "started_at": "2026-09-11T21:29:54.890402+00:00",
-        "finished_at": "2026-09-11T21:30:01.060389+00:00",
-        "duration_seconds": 6.17
+        "started_at": "2026-09-19T14:32:17.555059+00:00",
+        "finished_at": "2026-09-19T14:32:21.414714+00:00",
+        "duration_seconds": 3.86
+      }
+    },
+    {
+      "id": "consip_ordini_mepa",
+      "source_id": "consip_open_data",
+      "status": "ok",
+      "label": "consip_ordini_mepa",
+      "detail": "anni 2024-2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20260919T143312Z_60e26e19",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 69853,
+          "clean": 69853,
+          "mart": 22
+        },
+        "output_bytes": {
+          "raw": 11467474,
+          "clean": 492516,
+          "mart": 1686
+        },
+        "started_at": "2026-09-19T14:33:12.893796+00:00",
+        "finished_at": "2026-09-19T14:33:28.463804+00:00",
+        "duration_seconds": 15.57
       }
     },
     {
@@ -1634,21 +1953,27 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T212222Z_c4284055",
+        "run_id": "20260919T143911Z_817816fa",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
+          "raw": 100,
+          "clean": 100,
           "mart": 100
         },
         "output_rows": {
+          "raw": 1059772,
+          "clean": 1019679,
           "mart": 8
         },
         "output_bytes": {
+          "raw": 207471761,
+          "clean": 25098553,
           "mart": 1343
         },
-        "started_at": "2026-09-11T21:22:22.439409+00:00",
-        "finished_at": "2026-09-11T21:22:22.791932+00:00",
-        "duration_seconds": 0.353
+        "started_at": "2026-09-19T14:39:11.984189+00:00",
+        "finished_at": "2026-09-19T14:42:36.915445+00:00",
+        "duration_seconds": 204.931
       }
     },
     {
@@ -1659,7 +1984,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260911T212917Z_fd146370",
+        "run_id": "20260919T144249Z_f846e7fd",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1677,9 +2002,9 @@
           "clean": 188788,
           "mart": 2858
         },
-        "started_at": "2026-09-11T21:29:17.266647+00:00",
-        "finished_at": "2026-09-11T21:29:19.899298+00:00",
-        "duration_seconds": 2.633
+        "started_at": "2026-09-19T14:42:49.061988+00:00",
+        "finished_at": "2026-09-19T14:42:50.913249+00:00",
+        "duration_seconds": 1.851
       }
     }
   ],
@@ -1691,14 +2016,26 @@
         "label": "Categoria merceologica",
         "datasets": [
           {
+            "slug": "consip_cataloghi",
+            "name": "Consip Cataloghi",
+            "column": "codice_cpv",
+            "semantic_type": "cpv_code"
+          },
+          {
             "slug": "consip_ordini_convenzione",
             "name": "Consip Ordini Convenzione",
+            "column": "codice_cpv",
+            "semantic_type": "cpv_code"
+          },
+          {
+            "slug": "consip_ordini_mepa",
+            "name": "Consip Ordini Mepa",
             "column": "codice_cpv",
             "semantic_type": "cpv_code"
           }
         ],
         "types": {
-          "cpv_code": 1
+          "cpv_code": 3
         }
       },
       "Comune": {
@@ -1766,6 +2103,12 @@
             "semantic_type": "province_code"
           },
           {
+            "slug": "consip_ordini_mepa",
+            "name": "Consip Ordini Mepa",
+            "column": "sigla_provincia_pa",
+            "semantic_type": "province_code"
+          },
+          {
             "slug": "consip_rdo_td_stipulate",
             "name": "Consip Rdo Td Stipulate",
             "column": "sigla_provincia_pa",
@@ -1773,7 +2116,7 @@
           }
         ],
         "types": {
-          "province_code": 4
+          "province_code": 5
         }
       },
       "Regione": {
@@ -1844,6 +2187,12 @@
             "semantic_type": "year"
           },
           {
+            "slug": "consip_ordini_mepa",
+            "name": "Consip Ordini Mepa",
+            "column": "anno_riferimento",
+            "semantic_type": "year"
+          },
+          {
             "slug": "consip_partecipazioni",
             "name": "Consip Partecipazioni",
             "column": "anno_riferimento",
@@ -1857,7 +2206,7 @@
           }
         ],
         "types": {
-          "year": 9
+          "year": 10
         }
       }
     },
