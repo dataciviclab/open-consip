@@ -1,53 +1,68 @@
-root: "../../out"
+root: ../../out
 schema_version: 1
-
 dataset:
-  name: "consip_ordini_convenzione"
-  source_id: "consip_open_data"
-  tags: [finanza-pubblica, consip, ordini, convenzione, spesa]
+  name: consip_ordini_convenzione
+  source_id: consip_open_data
+  tags:
+  - finanza-pubblica
+  - consip
+  - ordini
+  - convenzione
+  - spesa
   category: finanza-pubblica
-  years: [2024, 2025, 2026]
-  time_coverage: {start_year: 2024, end_year: 2026}
-
+  years:
+  - 2024
+  - 2025
+  - 2026
+  time_coverage:
+    start_year: 2024
+    end_year: 2026
 raw:
   output_policy: overwrite
   sources:
-    - name: "consip_ordini_convenzione_2024"
-      type: "http_file"
-      year: 2024
-      args:
-        url: "https://dati.consip.it/download/dataset/ordini-convenzione-2024.csv"
-        filename: "ordini-convenzione-2024.csv"
-      primary: true
-    - name: "consip_ordini_convenzione_2025"
-      type: "http_file"
-      year: 2025
-      args:
-        url: "https://dati.consip.it/download/dataset/ordini-convenzione-2025.csv"
-        filename: "ordini-convenzione-2025.csv"
-      primary: true
-    - name: "consip_ordini_convenzione_2026"
-      type: "http_file"
-      year: 2026
-      args:
-        url: "https://dati.consip.it/download/dataset/ordini-convenzione-2026.csv"
-        filename: "ordini-convenzione-2026.csv"
-      primary: true
-
+  - name: consip_ordini_convenzione_2024
+    type: http_file
+    year: 2024
+    args:
+      url: https://dati.consip.it/download/dataset/ordini-convenzione-2024.csv
+      filename: ordini-convenzione-2024.csv
+    primary: true
+  - name: consip_ordini_convenzione_2025
+    type: http_file
+    year: 2025
+    args:
+      url: https://dati.consip.it/download/dataset/ordini-convenzione-2025.csv
+      filename: ordini-convenzione-2025.csv
+    primary: true
+  - name: consip_ordini_convenzione_2026
+    type: http_file
+    year: 2026
+    args:
+      url: https://dati.consip.it/download/dataset/ordini-convenzione-2026.csv
+      filename: ordini-convenzione-2026.csv
+    primary: true
 clean:
-  sql: "sql/clean.sql"
+  sql: sql/clean.sql
   read:
     source: auto
     mode: largest
-    delim: ","
-    encoding: "latin-1"
+    delim: ','
+    encoding: latin-1
     header: true
     ignore_errors: true
-  required_columns: [anno_riferimento, regione_pa, provincia_pa, convenzione, lotto, importo_ordinato, n_ordini, n_pa]
+  required_columns:
+  - anno_riferimento
+  - regione_pa
+  - provincia_pa
+  - convenzione
+  - lotto
+  - importo_ordinato
+  - n_ordini
+  - n_pa
   validate:
     min_rows: 1000
-    not_null: [anno_riferimento]
-
+    not_null:
+    - anno_riferimento
 mart:
   tables:
     - name: "mart_spesa_per_convenzione"
@@ -59,6 +74,7 @@ mart:
         required_columns: [anno_riferimento, convenzione, importo_totale, n_righe]
         primary_key: [anno_riferimento, convenzione]
         min_rows: 5
-
 validation:
   fail_on_error: true
+output:
+  artifacts: standard

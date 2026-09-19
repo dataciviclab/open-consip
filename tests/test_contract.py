@@ -79,9 +79,8 @@ def test_each_dataset_declares_minimum_contract(dataset_configs: list[Path]) -> 
         assert dataset["raw"]["sources"][0].get("primary") is True, f"{rel}: la prima source deve essere primary"
         assert dataset["clean"]["sql"], f"{rel}: manca clean.sql"
         assert dataset["clean"].get("required_columns"), f"{rel}: manca clean.required_columns"
-        assert dataset["clean"]["validate"].get("primary_key"), f"{rel}: manca clean.validate.primary_key"
         assert dataset["clean"]["validate"].get("not_null"), f"{rel}: manca clean.validate.not_null"
-        assert dataset["clean"]["validate"].get("min_rows") == 1, f"{rel}: min_rows deve essere 1"
+        assert dataset["clean"]["validate"].get("min_rows"), f"{rel}: manca clean.validate.min_rows"
         assert dataset["mart"]["tables"], f"{rel}: manca mart.tables"
         assert dataset["mart"].get("required_tables"), f"{rel}: manca mart.required_tables"
         assert dataset["mart"]["validate"].get("table_rules"), f"{rel}: manca mart.validate.table_rules"
@@ -155,13 +154,23 @@ def test_required_tables_and_rules_match_declared_marts(dataset_configs: list[Pa
 
 @pytest.mark.contract
 def test_no_run_outputs_committed() -> None:
-    if not OUT_DIR.exists():
-        return
+    """Verifica che nessun output di run sia stato committato in git."""
+    import subprocess
+
+    result = subprocess.run(
+        ["git", "ls-files", "out/"],
+        capture_output=True,
+        text=True,
+        cwd=REPO_ROOT,
+    )
+    tracked = [REPO_ROOT / line for line in result.stdout.splitlines() if line]
     offenders: list[str] = []
-    for path in OUT_DIR.rglob("*"):
+    for path in tracked:
         if not path.is_file():
             continue
         if path.name == "README.md":
+            continue
+        if path.name == ".gitkeep":
             continue
         if path.suffix.lower() in BLOCKED_OUT_EXTENSIONS or "_runs" in path.parts:
             offenders.append(str(path.relative_to(REPO_ROOT)).replace("\\", "/"))

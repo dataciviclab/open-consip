@@ -4,6 +4,12 @@
 out/*
 !out/.gitkeep
 
+# CSV di input script source (scaricati a runtime)
+datasets/*/partecipazioni*.csv
+datasets/*/ordini-mepa*.csv
+datasets/*/cataloghi*.csv
+datasets/*/raw_input.csv
+
 # =========================
 # NOTEBOOK / PYTHON
 # =========================

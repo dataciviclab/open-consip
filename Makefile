@@ -1,7 +1,11 @@
 # CLI toolkit del Lab. La memoria DuckDB è controllata da safe_connect
 # (lab-connectors) via env DUCKDB_MEMORY_LIMIT (default 2GB); nei runner CI
 # con RAM ridotta il pipeline imposta limiti conservativi.
+# TOOLKIT_ALLOW_SCRIPT_SOURCE: serve per i dataset che usano source type
+# "script" (partecipazioni, ordini-mepa, cataloghi) — il server CONSIP
+# tronca i file grandi, lo script usa download chunked via Range requests.
 TOOLKIT = toolkit
+export TOOLKIT_ALLOW_SCRIPT_SOURCE := 1
 
 # --- Dataset del repo -------------------------------------------------------
 # Convenzione (ADR-001, modello multi-dataset):
@@ -53,6 +57,11 @@ clean:
 .PHONY: clean-runs
 clean-runs:
 	rm -rf out/data/_runs/
+
+# Pulisce i CSV temporanei lasciati dallo script source type nelle dir dataset
+.PHONY: clean-temp
+clean-temp:
+	find datasets -maxdepth 2 -name '*.csv' ! -name 'raw_input.csv' -delete 2>/dev/null || true
 
 # --- Registry (artifact catalogo — dry-run di default) -----------------------
 

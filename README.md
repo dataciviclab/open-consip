@@ -28,11 +28,13 @@ li trasforma in mart analitici e li rende interrogabili via dashboard Streamlit.
 | `consip-operatorieconomici` | Anagrafica imprese con attività CONSIP | 2024-2026 | 2 |
 | `consip-gareasp` | Gare ASP geolocalizzate | 2024-2026 | 2 |
 | `consip-ordiniconvenzione` | Ordini diretti in convenzione | 2024-2026 | 1 |
+| `consip-ordinimpepa` | Ordini su MePA per bene/servizio | 2024-2026 | 2 |
 | `consip-partecipazioni` | Imprese partecipanti alle iniziative | 2024-2026 | 1 |
 | `consip-rdotdstipulate` | Richieste di offerta/trattative dirette | 2024-2026 | 1 |
 | `consip-amministrazioni` | Anagrafica PA con coordinate | 2024-2026 | 1 |
+| `consip-cataloghi` | Catalogo beni/servizi disponibili | 2024-2026 | 1 |
 
-### Mart analitici (12 totali)
+### Mart analitici (14 dataset + 2 compose)
 
 **Spesa** (2): mart_spesa_per_territorio, mart_spesa_per_convenzione
 
@@ -40,7 +42,11 @@ li trasforma in mart analitici e li rende interrogabili via dashboard Streamlit.
 
 **Imprese** (2): mart_imprese_per_territorio, mart_concentrazione_imprese
 
-**Altri** (4): mart_riepilogo, mart_pa_per_territorio, mart_vincitori_per_strumento, mart_competizione_mepa
+**Imprese dual-use** (2): mart_imprese_per_territorio, mart_concentrazione_imprese (compose CONSIP+ANAC)
+
+**Altri** (4): mart_pa_per_territorio, mart_vincitori_per_strumento, mart_competizione_mepa, mart_cataloghi_per_categoria
+
+**Ordini MePA** (2): mart_ordini_mepa_per_bene, mart_ordini_mepa_per_regione
 
 ## Compose CONSIP+ANAC
 
@@ -98,30 +104,32 @@ python -m pytest tests/
 
 ```
 open-consip/
-├── datasets/                   # 9 dataset singoli (toolkit pipeline)
-│   ├── consip-consumi-convenzione/
+├── datasets/                   # 10 dataset singoli (toolkit pipeline)
+│   ├── consip-amministrazioni/
 │   ├── consip-bandie-gare/
-│   ├── consip-operatorieconomici/
+│   ├── consip-cataloghi/
+│   ├── consip-consumi-convenzione/
 │   ├── consip-gare-asp/
-│   ├── consip-ordiniconvenzione/
+│   ├── consip-operatorieconomici/
+│   ├── consip-ordini-convenzione/
+│   ├── consip-ordini-mepa/
 │   ├── consip-partecipazioni/
-│   ├── consip-rdotdstipulate/
-│   └── consip-amministrazioni/
+│   └── consip-rdo-td-stipulate/
 ├── compose/
 │   └── consip-anac-imprese/    # cross-consip-anac (dual-use)
-├── support/                    # anagrafiche condivise
 ├── dashboard/                  # Streamlit (7 pagine)
-├── out/                        # output pipeline (raw/clean/mart)
-├── registry/                   # artifact catalog
+│   └── pages/
+├── docs/                       # sources, decisions, data_dictionary
 ├── tests/                      # contract test
+├── .github/workflows/          # check.yml, pipeline.yml
 ├── Makefile
 └── requirements.txt
 ```
 
 ## CI/CD
 
-- **check.yml**: Valida i config YAML su ogni PR/push
-- **pipeline.yml**: Esegue le pipeline, sync GCS, aggiorna registry
+- **check.yml**: Valida i config YAML e audita i test marker su ogni PR/push (reusable workflows)
+- **pipeline.yml**: Esegue le pipeline mensilmente o su manuale (reusable workflow)
 
 ## Perché fidarsi
 

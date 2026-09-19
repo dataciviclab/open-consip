@@ -1,54 +1,75 @@
-root: "../../out"
+root: ../../out
 schema_version: 1
-
 dataset:
-  name: "consip_operatori_economici"
-  source_id: "consip_open_data"
-  tags: [finanza-pubblica, consip, imprese, operatori-economici]
+  name: consip_operatori_economici
+  source_id: consip_open_data
+  tags:
+  - finanza-pubblica
+  - consip
+  - imprese
+  - operatori-economici
   category: economia
-  years: [2024, 2025, 2026]
-  time_coverage: {start_year: 2024, end_year: 2026}
-
+  years:
+  - 2024
+  - 2025
+  - 2026
+  time_coverage:
+    start_year: 2024
+    end_year: 2026
 raw:
   output_policy: overwrite
   sources:
-    - name: "consip_operatori_economici_2024"
-      type: "http_file"
-      year: 2024
-      args:
-        url: "https://dati.consip.it/download/dataset/operatori_economici2024.csv"
-        filename: "operatori_economici2024.csv"
-      primary: true
-    - name: "consip_operatori_economici_2025"
-      type: "http_file"
-      year: 2025
-      args:
-        url: "https://dati.consip.it/download/dataset/operatori_economici2025.csv"
-        filename: "operatori_economici2025.csv"
-      primary: true
-    - name: "consip_operatori_economici_2026"
-      type: "http_file"
-      year: 2026
-      args:
-        url: "https://dati.consip.it/download/dataset/operatori_economici2026.csv"
-        filename: "operatori_economici2026.csv"
-      primary: true
-
+  - name: consip_operatori_economici_2024
+    type: http_file
+    year: 2024
+    args:
+      url: https://dati.consip.it/download/dataset/operatori_economici2024.csv
+      filename: operatori_economici2024.csv
+    primary: true
+  - name: consip_operatori_economici_2025
+    type: http_file
+    year: 2025
+    args:
+      url: https://dati.consip.it/download/dataset/operatori_economici2025.csv
+      filename: operatori_economici2025.csv
+    primary: true
+  - name: consip_operatori_economici_2026
+    type: http_file
+    year: 2026
+    args:
+      url: https://dati.consip.it/download/dataset/operatori_economici2026.csv
+      filename: operatori_economici2026.csv
+    primary: true
 clean:
-  sql: "sql/clean.sql"
+  sql: sql/clean.sql
   read:
     source: auto
     mode: largest
-    delim: ","
-    encoding: "latin-1"
+    delim: ','
+    encoding: latin-1
     header: true
     ignore_errors: true
     null_padding: true
-  required_columns: [anno_riferimento, partita_iva, ragione_sociale, forma_societaria, nazione_sede_legale, regione_sede_legale, provincia_sede_legale, comune_sede_legale, indirizzo_sede_legale, latitudine_sede_legale, longitudine_sede_legale, numero_aggiudicazioni, numero_abilitazioni, numero_transazioni, numero_contratti_attivi]
+  required_columns:
+  - anno_riferimento
+  - partita_iva
+  - ragione_sociale
+  - forma_societaria
+  - nazione_sede_legale
+  - regione_sede_legale
+  - provincia_sede_legale
+  - comune_sede_legale
+  - indirizzo_sede_legale
+  - latitudine_sede_legale
+  - longitudine_sede_legale
+  - numero_aggiudicazioni
+  - numero_abilitazioni
+  - numero_transazioni
+  - numero_contratti_attivi
   validate:
     min_rows: 100
-    not_null: [anno_riferimento]
-
+    not_null:
+    - anno_riferimento
 mart:
   tables:
     - name: "mart_imprese_per_territorio"
@@ -66,6 +87,7 @@ mart:
         required_columns: [anno_riferimento, regione_sede_legale, forma_societaria, n_imprese, n_aggiudicazioni_totale, pct_imprese_con_agg]
         primary_key: [anno_riferimento, regione_sede_legale, forma_societaria]
         min_rows: 5
-
 validation:
   fail_on_error: true
+output:
+  artifacts: standard
