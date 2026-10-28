@@ -14,9 +14,9 @@ from lab_connectors.duckdb.queries import (
 )
 
 PREFIX = "open-consip/"
-YEARS_ALL = [2023, 2024, 2025, 2026]
+YEARS_ALL = [2024, 2025, 2026]
 YEARS_GARE = [2024, 2025, 2026]
-YEARS_CONSUMI = [2023, 2024, 2025]
+YEARS_CONSUMI = [2024, 2025, 2026]
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
