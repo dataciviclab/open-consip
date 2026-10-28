@@ -11,13 +11,13 @@ La spesa per energia, gas e carburanti delle PA italiane tramite Consip è omoge
 - **Portale**: [dati.consip.it](https://dati.consip.it)
 - **Dataset**: CONSUMI GENERATI TRAMITE ORDINI DIRETTI DI ACQUISTO IN CONVENZIONE
 - **Formato**: CSV, delimitato `,`, encoding utf-8
-- **Anni disponibili**: 2023, 2024, 2025
+- **Anni disponibili**: 2024, 2025, 2026
 - **Aggiornamento**: annuale (file nominato per anno di edizione)
 - **Licenza**: CC-BY-4.0
 
 ## Perimetro
 
-- **Periodo**: 2023-2025 (3 anni)
+- **Periodo**: 2024-2026 (3 anni)
 - **Granularità**: lotto-convenzione-provincia-PA (una riga = consumo aggregato per coppia PA-convenzione-lotto)
 - **Chiavi territoriali**: regione PA, provincia PA, sigla provincia, regione fornitore
 - **Cosa contiene**: consumi economici di energia e utility (elettricità, gas, carburanti) acquistati tramite ordini diretti in convenzione Consip
@@ -53,13 +53,14 @@ La spesa per energia, gas e carburanti delle PA italiane tramite Consip è omoge
 
 - **Sede fornitore ≠ luogo esecuzione**: la regione del fornitore non coincide necessariamente con il luogo dove il servizio viene erogato
 - **Non copre tutte le categorie merceologiche Consip**: solo utility (energia, gas, carburanti)
-- **Serie storica breve**: 3 anni (2023-2025), insufficiente per trend strutturali
+- **Serie storica breve**: 3 anni (2024-2026), insufficiente per trend strutturali
 - **Dati aggregati, non additivi**: i valori sono aggregate statistiche, non transazioni singole
-- **File 2026 identico a 2025**: il file nominato 2026 è copia del 2025 (dato non ancora aggiornato). Anni validi: 2023-2025.
+- **Il 2023 non è più pubblicato dalla fonte**: Consip tiene una finestra mobile di 3 anni; il file `consumi-in-convenzione-2023.csv` risponde 404 e il 2026 lo ha sostituito. La serie 2023 esiste **solo nel nostro snapshot** (clean pubblicato) e **non è più riproducibile**: va trattata come dato storico non rigenerabile.
+- **Il file 2026 era un duplicato fino a fine 2025**: era copia del 2025 (dato non ancora aggiornato) — motivo per cui il dataset era fermo a `2023-2025`. Verificato il 2026-10-28: il file è ora distinto (1,05 MB il 2025, 0,91 MB il 2026), quindi entra nel perimetro.
 
 ## Criterio di promozione
 
-- Pipeline completa su 2023-2025 (RAW → CLEAN → MART)
+- Pipeline completa su 2024-2026 (RAW → CLEAN → MART)
 - Mart con almeno 10 righe per anno
 - Nessun errore di validazione su `not_null` e `primary_key`
 - Analisi pubblicata che risponde alla domanda guida

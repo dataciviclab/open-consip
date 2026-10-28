@@ -22,6 +22,11 @@ jobs:
     with:
       repo-slug: "open-consip"
       run-command: "make run-all"
+      # Il server CONSIP è intermittente per i runner GHA (connect timeout sui
+      # download, non sui probe: il radar lo vede GREEN). `HttpClient` ritenta e
+      # all'ultimo tentativo ripiega sul proxy se `BLOCKED_SOURCE_PROXY` è
+      # configurato; `download_chunked.py` legge la stessa variabile.
+      extra-env: "BLOCKED_SOURCE_PROXY=${{ vars.BLOCKED_SOURCE_PROXY }}"
     permissions:
       contents: write
       pull-requests: write

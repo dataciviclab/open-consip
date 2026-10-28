@@ -21,12 +21,12 @@ raw:
   output_policy: overwrite
   sources:
   - name: consip_ordini_mepa
-    type: script
+    type: http_file
     client:
-      timeout: 600
+      timeout: 300
     args:
-      command: curl -sS -L --http1.1 --retry 3 --retry-delay 2 --max-time 600 -o "ordini-mepa-{year}.csv" "https://dati.consip.it/download/dataset/ordini-mepa-{year}.csv"
-      output: "ordini-mepa-{year}.csv"
+      url: "https://dati.consip.it/download/dataset/ordini-mepa-{year}.csv"
+      filename: "ordini-mepa-{year}.csv"
     primary: true
 clean:
   sql: sql/clean.sql

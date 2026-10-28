@@ -3,21 +3,37 @@
 The CONSIP server drops connections for files > ~100MB. This script downloads
 in chunks using HTTP Range headers, which the server supports (HTTP 206).
 
+Usa il proxy delle fonti bloccate (``BLOCKED_SOURCE_PROXY``) se configurato:
+``urllib`` legge ``HTTPS_PROXY``/``http_proxy``, non la variabile del Lab,
+quindi senza questo il fallback proxy non coprirebbe i download via script.
+
 Usage:
     python3 scripts/download_chunked.py <url> <output_file> [chunk_size_mb]
 
 Called by toolkit script source type for large datasets.
 """
+import os
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 
 DEFAULT_CHUNK_MB = 8
+PROXY_ENV_VARS = ("BLOCKED_SOURCE_PROXY", "HTTPS_PROXY", "https_proxy")
+
+
+def _build_opener() -> urllib.request.OpenerDirector:
+    """Opener con il proxy delle fonti bloccate, se configurato."""
+    proxy = next((os.environ[v] for v in PROXY_ENV_VARS if os.environ.get(v)), None)
+    if not proxy:
+        return urllib.request.build_opener()
+    return urllib.request.build_opener(
+        urllib.request.ProxyHandler({"http": proxy, "https": proxy})
+    )
 
 
 def get_file_size(url: str) -> int:
     req = urllib.request.Request(url, method="HEAD")
-    with urllib.request.urlopen(req, timeout=30) as resp:
+    with _build_opener().open(req, timeout=30) as resp:
         return int(resp.headers["Content-Length"])
 
 
@@ -25,6 +41,7 @@ def download_chunked(url: str, dest: str, chunk_mb: int = DEFAULT_CHUNK_MB) -> N
     total = get_file_size(url)
     chunk_size = chunk_mb * 1024 * 1024
     downloaded = 0
+    opener = _build_opener()
 
     with open(dest, "wb") as f:
         while downloaded < total:
@@ -34,7 +51,7 @@ def download_chunked(url: str, dest: str, chunk_mb: int = DEFAULT_CHUNK_MB) -> N
 
             for attempt in range(3):
                 try:
-                    with urllib.request.urlopen(req, timeout=120) as resp:
+                    with opener.open(req, timeout=120) as resp:
                         data = resp.read()
                         f.write(data)
                         downloaded += len(data)
