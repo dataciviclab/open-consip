@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "open-consip",
   "source_repo": "dataciviclab/open-consip",
-  "updated_at": "2026-09-19",
+  "updated_at": "2026-10-28",
   "datasets": [
     {
       "slug": "consip_amministrazioni",
@@ -614,8 +614,8 @@
       "source": "",
       "source_id": "consip_open_data",
       "period": {
-        "start": 2023,
-        "end": 2025
+        "start": 2024,
+        "end": 2026
       },
       "tags": [
         "finanza-pubblica",
@@ -1533,8 +1533,8 @@
       "table": "mart_pa_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_amministrazioni/2026/mart_pa_per_territorio.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_amministrazioni/*/mart_pa_per_territorio.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1563,8 +1563,8 @@
       "table": "mart_bandi_per_strumento",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/2026/mart_bandi_per_strumento.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/*/mart_bandi_per_strumento.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1573,8 +1573,8 @@
       "table": "mart_competizione_strumento",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/2026/mart_competizione_strumento.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/*/mart_competizione_strumento.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1583,8 +1583,8 @@
       "table": "mart_cataloghi_per_categoria",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_cataloghi/2026/mart_cataloghi_per_categoria.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_cataloghi/*/mart_cataloghi_per_categoria.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1593,8 +1593,8 @@
       "table": "mart_spesa_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_consumi_convenzione/2025/mart_spesa_per_territorio.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_consumi_convenzione/*/mart_spesa_per_territorio.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1603,8 +1603,8 @@
       "table": "mart_esito_gare_provincia",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/2026/mart_esito_gare_provincia.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/*/mart_esito_gare_provincia.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1613,8 +1613,8 @@
       "table": "mart_gare_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/2026/mart_gare_per_territorio.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/*/mart_gare_per_territorio.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1623,8 +1623,8 @@
       "table": "mart_concentrazione_imprese",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/2026/mart_concentrazione_imprese.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/*/mart_concentrazione_imprese.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1633,8 +1633,8 @@
       "table": "mart_imprese_per_territorio",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/2026/mart_imprese_per_territorio.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/*/mart_imprese_per_territorio.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1643,8 +1643,8 @@
       "table": "mart_spesa_per_convenzione",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_convenzione/2026/mart_spesa_per_convenzione.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_convenzione/*/mart_spesa_per_convenzione.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1653,8 +1653,8 @@
       "table": "mart_ordini_mepa_per_bene",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/2026/mart_ordini_mepa_per_bene.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/*/mart_ordini_mepa_per_bene.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1663,8 +1663,8 @@
       "table": "mart_ordini_mepa_per_regione",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/2026/mart_ordini_mepa_per_regione.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/*/mart_ordini_mepa_per_regione.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1673,8 +1673,8 @@
       "table": "mart_vincitori_per_strumento",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_partecipazioni/2026/mart_vincitori_per_strumento.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_partecipazioni/*/mart_vincitori_per_strumento.parquet",
+        "multi_file": true
       }
     },
     {
@@ -1683,8 +1683,8 @@
       "table": "mart_competizione_mepa",
       "location": {
         "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_rdo_td_stipulate/2026/mart_competizione_mepa.parquet",
-        "multi_file": false
+        "path": "gs://dataciviclab-mart/open-consip/consip_rdo_td_stipulate/*/mart_competizione_mepa.parquet",
+        "multi_file": true
       }
     }
   ],
@@ -1705,7 +1705,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T142154Z_161be762",
+        "run_id": "20261028T193153Z_e7b2d875",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1714,18 +1714,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 25468,
-          "clean": 25468,
-          "mart": 404
+          "raw": 25515,
+          "clean": 25515,
+          "mart": 405
         },
         "output_bytes": {
-          "raw": 4022935,
-          "clean": 891179,
-          "mart": 9610
+          "raw": 4030111,
+          "clean": 893341,
+          "mart": 9632
         },
-        "started_at": "2026-09-19T14:21:54.467433+00:00",
-        "finished_at": "2026-09-19T14:21:59.461634+00:00",
-        "duration_seconds": 4.994
+        "started_at": "2026-10-28T19:31:53.084025+00:00",
+        "finished_at": "2026-10-28T19:31:58.858613+00:00",
+        "duration_seconds": 5.775
       }
     },
     {
@@ -1736,7 +1736,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T142210Z_957a871c",
+        "run_id": "20261028T193212Z_9b215378",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1745,18 +1745,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1785,
-          "clean": 1785,
+          "raw": 1854,
+          "clean": 1854,
           "mart": 14
         },
         "output_bytes": {
-          "raw": 524902,
-          "clean": 65311,
-          "mart": 3345
+          "raw": 545683,
+          "clean": 66998,
+          "mart": 3346
         },
-        "started_at": "2026-09-19T14:22:10.983279+00:00",
-        "finished_at": "2026-09-19T14:22:13.346088+00:00",
-        "duration_seconds": 2.363
+        "started_at": "2026-10-28T19:32:12.666042+00:00",
+        "finished_at": "2026-10-28T19:32:15.936633+00:00",
+        "duration_seconds": 3.271
       }
     },
     {
@@ -1767,7 +1767,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T142659Z_08e36fd4",
+        "run_id": "20261028T193401Z_e7978308",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1776,18 +1776,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 272156,
-          "clean": 244660,
-          "mart": 25
+          "raw": 310960,
+          "clean": 279476,
+          "mart": 24
         },
         "output_bytes": {
-          "raw": 61401060,
-          "clean": 111861,
-          "mart": 1746
+          "raw": 70310042,
+          "clean": 130157,
+          "mart": 1752
         },
-        "started_at": "2026-09-19T14:26:59.718691+00:00",
-        "finished_at": "2026-09-19T14:27:59.434370+00:00",
-        "duration_seconds": 59.716
+        "started_at": "2026-10-28T19:34:01.136793+00:00",
+        "finished_at": "2026-10-28T19:34:26.984160+00:00",
+        "duration_seconds": 25.847
       }
     },
     {
@@ -1795,11 +1795,11 @@
       "source_id": "consip_open_data",
       "status": "ok",
       "label": "consip_consumi_convenzione",
-      "detail": "anni 2023-2025 — mart: si",
+      "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T142808Z_1eb2dab0",
-        "year": 2025,
+        "run_id": "20261028T193438Z_3b5f4f36",
+        "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
           "raw": 100,
@@ -1807,18 +1807,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 7115,
-          "clean": 7115,
-          "mart": 3778
+          "raw": 6208,
+          "clean": 6208,
+          "mart": 3605
         },
         "output_bytes": {
-          "raw": 1096932,
-          "clean": 79910,
-          "mart": 38317
+          "raw": 949422,
+          "clean": 70875,
+          "mart": 35795
         },
-        "started_at": "2026-09-19T14:28:08.715480+00:00",
-        "finished_at": "2026-09-19T14:28:10.231926+00:00",
-        "duration_seconds": 1.516
+        "started_at": "2026-10-28T19:34:38.207677+00:00",
+        "finished_at": "2026-10-28T19:34:39.807427+00:00",
+        "duration_seconds": 1.6
       }
     },
     {
@@ -1829,7 +1829,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T142842Z_f7713e3a",
+        "run_id": "20261028T193513Z_ad185dae",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1838,18 +1838,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 21367,
-          "clean": 21358,
+          "raw": 21927,
+          "clean": 21907,
           "mart": 570
         },
         "output_bytes": {
-          "raw": 12865324,
-          "clean": 1405824,
-          "mart": 22639
+          "raw": 13211098,
+          "clean": 1449301,
+          "mart": 22857
         },
-        "started_at": "2026-09-19T14:28:42.747148+00:00",
-        "finished_at": "2026-09-19T14:28:59.916569+00:00",
-        "duration_seconds": 17.169
+        "started_at": "2026-10-28T19:35:13.831473+00:00",
+        "finished_at": "2026-10-28T19:35:31.552068+00:00",
+        "duration_seconds": 17.721
       }
     },
     {
@@ -1860,7 +1860,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T143058Z_5d2d9c8c",
+        "run_id": "20261028T193728Z_bffca797",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1869,18 +1869,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 315074,
-          "clean": 315058,
-          "mart": 910
+          "raw": 321306,
+          "clean": 321290,
+          "mart": 968
         },
         "output_bytes": {
-          "raw": 56925253,
-          "clean": 12001355,
-          "mart": 23426
+          "raw": 58066531,
+          "clean": 12255098,
+          "mart": 24590
         },
-        "started_at": "2026-09-19T14:30:58.108505+00:00",
-        "finished_at": "2026-09-19T14:32:00.856825+00:00",
-        "duration_seconds": 62.748
+        "started_at": "2026-10-28T19:37:28.120062+00:00",
+        "finished_at": "2026-10-28T19:38:27.933931+00:00",
+        "duration_seconds": 59.814
       }
     },
     {
@@ -1891,7 +1891,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T143217Z_5426ad5e",
+        "run_id": "20261028T193846Z_6cc74cd6",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1900,18 +1900,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 11328,
-          "clean": 11328,
-          "mart": 17
+          "raw": 13181,
+          "clean": 13181,
+          "mart": 18
         },
         "output_bytes": {
-          "raw": 2269724,
-          "clean": 73738,
-          "mart": 1656
+          "raw": 2655132,
+          "clean": 83726,
+          "mart": 1681
         },
-        "started_at": "2026-09-19T14:32:17.555059+00:00",
-        "finished_at": "2026-09-19T14:32:21.414714+00:00",
-        "duration_seconds": 3.86
+        "started_at": "2026-10-28T19:38:46.086122+00:00",
+        "finished_at": "2026-10-28T19:38:50.332368+00:00",
+        "duration_seconds": 4.246
       }
     },
     {
@@ -1922,7 +1922,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T143312Z_60e26e19",
+        "run_id": "20261028T193949Z_8db71e1c",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1931,18 +1931,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 69853,
-          "clean": 69853,
+          "raw": 83908,
+          "clean": 83908,
           "mart": 22
         },
         "output_bytes": {
-          "raw": 11467474,
-          "clean": 492516,
-          "mart": 1686
+          "raw": 13862435,
+          "clean": 595969,
+          "mart": 1692
         },
-        "started_at": "2026-09-19T14:33:12.893796+00:00",
-        "finished_at": "2026-09-19T14:33:28.463804+00:00",
-        "duration_seconds": 15.57
+        "started_at": "2026-10-28T19:39:49.171376+00:00",
+        "finished_at": "2026-10-28T19:40:07.340899+00:00",
+        "duration_seconds": 18.17
       }
     },
     {
@@ -1953,7 +1953,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T143911Z_817816fa",
+        "run_id": "20261028T194213Z_a44d5927",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1962,18 +1962,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 1059772,
-          "clean": 1019679,
+          "raw": 1080539,
+          "clean": 1039750,
           "mart": 8
         },
         "output_bytes": {
-          "raw": 207471761,
-          "clean": 25098553,
+          "raw": 211966074,
+          "clean": 25516318,
           "mart": 1343
         },
-        "started_at": "2026-09-19T14:39:11.984189+00:00",
-        "finished_at": "2026-09-19T14:42:36.915445+00:00",
-        "duration_seconds": 204.931
+        "started_at": "2026-10-28T19:42:13.940540+00:00",
+        "finished_at": "2026-10-28T19:43:28.735880+00:00",
+        "duration_seconds": 74.795
       }
     },
     {
@@ -1984,7 +1984,7 @@
       "detail": "anni 2024-2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20260919T144249Z_f846e7fd",
+        "run_id": "20261028T194345Z_f3b86ec6",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1993,18 +1993,18 @@
           "mart": 100
         },
         "output_rows": {
-          "raw": 12813,
-          "clean": 12813,
+          "raw": 14571,
+          "clean": 14571,
           "mart": 40
         },
         "output_bytes": {
-          "raw": 1798076,
-          "clean": 188788,
-          "mart": 2858
+          "raw": 2053507,
+          "clean": 216122,
+          "mart": 2857
         },
-        "started_at": "2026-09-19T14:42:49.061988+00:00",
-        "finished_at": "2026-09-19T14:42:50.913249+00:00",
-        "duration_seconds": 1.851
+        "started_at": "2026-10-28T19:43:45.491457+00:00",
+        "finished_at": "2026-10-28T19:43:47.372337+00:00",
+        "duration_seconds": 1.881
       }
     }
   ],
