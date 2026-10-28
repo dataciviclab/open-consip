@@ -26,6 +26,7 @@ raw:
       timeout: 1800
     args:
       command: python3 ../../scripts/download_chunked.py "https://dati.consip.it/download/dataset/partecipazioni{year}.csv" "partecipazioni{year}.csv"
+      upstream_url: "https://dati.consip.it/download/dataset/partecipazioni{year}.csv"
       output: "partecipazioni{year}.csv"
     primary: true
 clean:
