@@ -40,8 +40,37 @@ pipeline = [
     "dataciviclab-toolkit @ git+https://github.com/dataciviclab/toolkit.git",
 ]
 
+# Engine SO per il source catalog per-repo (registry/catalog.json).
+# `validate` = stadio item-level del motore (merge + sniff CSV + parquet).
+observatory = [
+    "dataciviclab-source-observatory[validate] @ git+https://github.com/dataciviclab/source-observatory.git@main",
+]
+
 [project.urls]
 Home = "https://github.com/dataciviclab/open-consip"
 
 [tool.toolkit.extends]
 source_id = "open-consip"
+
+# ── Source catalog per-repo ───────────────────────────────────────────────────
+# Portale CKAN proprio di Consip (dati.consip.it): non è un harvest di
+# dati.gov.it, quindi il catalogo per-repo è autoritativo e al wiring con
+# l'aggregatore la voce `consip_open_data` del registry centrale si rimuove
+# (stesso base_url).
+#
+# I 10 dataset del repo scaricano da `/download/dataset/` sullo stesso
+# portale: l'inventario contiene quelle `distribution_url`, quindi il drift
+# `referenced_items` verifica davvero gli item che consumiamo.
+#
+# `source_id` è quello dei dataset.yml (`consip_open_data`), non lo slug repo:
+# `datasets_in_use` si aggancia lì. Il disallineamento con
+# `[tool.toolkit.extends].source_id` produce un warning atteso (come per
+# appalti-pubblici, indice-pa, open-mur, sistema-bancario).
+[tool.observatory]
+source_id = "consip_open_data"
+protocol = "ckan"
+base_url = "https://dati.consip.it/api/3/action/package_list?limit=1"
+observation_mode = "catalog-watch"
+verdict = "go"
+note = "CKAN proprio di Consip (dati.consip.it, 16 package al 2026-10-28). I dataset del repo consumano /download/dataset/ sullo stesso portale. Baseline centrale 17 package (2026-04-10, reliability medium): il catalog-watch per-repo rende visibile quel delta."
+
