@@ -3,65 +3,55 @@
 The CONSIP server drops connections for files > ~100MB. This script downloads
 in chunks using HTTP Range headers, which the server supports (HTTP 206).
 
-Usa il proxy delle fonti bloccate (``BLOCKED_SOURCE_PROXY``) se configurato:
-``urllib`` legge ``HTTPS_PROXY``/``http_proxy``, non la variabile del Lab,
-quindi senza questo il fallback proxy non coprirebbe i download via script.
+Il proxy delle fonti bloccate (``BLOCKED_SOURCE_PROXY``) è gestito da
+``HttpClient`` come fallback automatico.
 
 Usage:
     python3 scripts/download_chunked.py <url> <output_file> [chunk_size_mb]
 
 Called by toolkit script source type for large datasets.
 """
-import os
 import sys
-import urllib.error
-import urllib.request
+
+from lab_connectors.http import HttpClient
 
 DEFAULT_CHUNK_MB = 8
-PROXY_ENV_VARS = ("BLOCKED_SOURCE_PROXY", "HTTPS_PROXY", "https_proxy")
-
-
-def _build_opener() -> urllib.request.OpenerDirector:
-    """Opener con il proxy delle fonti bloccate, se configurato."""
-    proxy = next((os.environ[v] for v in PROXY_ENV_VARS if os.environ.get(v)), None)
-    if not proxy:
-        return urllib.request.build_opener()
-    return urllib.request.build_opener(
-        urllib.request.ProxyHandler({"http": proxy, "https": proxy})
-    )
 
 
 def get_file_size(url: str) -> int:
-    req = urllib.request.Request(url, method="HEAD")
-    with _build_opener().open(req, timeout=30) as resp:
-        return int(resp.headers["Content-Length"])
+    """Content-Length via HEAD (HttpClient: retry + fallback proxy/SSL)."""
+    result = HttpClient(timeout=30).head(url)
+    resp = result.response
+    if resp is None or resp.status_code >= 400 or "Content-Length" not in resp.headers:
+        raise RuntimeError(f"Content-Length non disponibile per {url}: {result.err}")
+    return int(resp.headers["Content-Length"])
 
 
 def download_chunked(url: str, dest: str, chunk_mb: int = DEFAULT_CHUNK_MB) -> None:
     total = get_file_size(url)
     chunk_size = chunk_mb * 1024 * 1024
     downloaded = 0
-    opener = _build_opener()
+    client = HttpClient(timeout=120, max_retries=3)
 
     with open(dest, "wb") as f:
         while downloaded < total:
             end = min(downloaded + chunk_size - 1, total - 1)
-            req = urllib.request.Request(url)
-            req.add_header("Range", f"bytes={downloaded}-{end}")
+            headers = {"Range": f"bytes={downloaded}-{end}"}
 
             for attempt in range(3):
-                try:
-                    with opener.open(req, timeout=120) as resp:
-                        data = resp.read()
-                        f.write(data)
-                        downloaded += len(data)
-                        pct = downloaded * 100 // total
-                        print(f"  {pct}% ({downloaded}/{total} bytes)", flush=True)
-                        break
-                except (urllib.error.URLError, OSError) as e:
-                    if attempt == 2:
-                        raise
-                    print(f"  retry {attempt + 1}: {e}", file=sys.stderr)
+                result = client.get(url, headers=headers)
+                resp = result.response
+                if resp is not None and resp.status_code in (200, 206):
+                    data = resp.content
+                    f.write(data)
+                    downloaded += len(data)
+                    pct = downloaded * 100 // total
+                    print(f"  {pct}% ({downloaded}/{total} bytes)", flush=True)
+                    break
+                if attempt == 2:
+                    status = resp.status_code if resp is not None else "no response"
+                    raise RuntimeError(f"Range {downloaded}-{end} fallito: HTTP {status} ({result.err})")
+                print(f"  retry {attempt + 1}: {result.err}", file=sys.stderr)
 
     print(f"  OK: {downloaded} bytes -> {dest}")
 
