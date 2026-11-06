@@ -4,12 +4,18 @@ Acquisti pubblici italiani: dati Consip per regione, strumento, impresa.
 """
 
 import streamlit as st
+from lab_connectors.branding import apply_branding
 
 st.set_page_config(
     page_title="Open CONSIP · Dashboard",
     page_icon="🏛️",
     layout="wide",
     initial_sidebar_state="expanded",
+)
+
+apply_branding(
+    repo_name="open-consip",
+    repo_url="https://github.com/dataciviclab/open-consip",
 )
 
 pages = {
@@ -35,6 +41,5 @@ st.sidebar.caption("Dati: dati.consip.it + datiuslavoro.giustizia.it (CC BY 4.0)
 st.sidebar.caption(
     "Codice: [dataciviclab/open-consip](https://github.com/dataciviclab/open-consip)"
 )
-st.sidebar.caption("[DataCivicLab](https://dataciviclab.org/) · CC BY 4.0")
 
 pg.run()
