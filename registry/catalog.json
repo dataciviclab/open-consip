@@ -1,6 +1,6 @@
 {
   "source_id": "consip_open_data",
-  "generated_at": "2026-11-02T12:37:25+00:00",
+  "generated_at": "2026-11-09T12:59:30+00:00",
   "report_version": 1,
   "timing": {},
   "identity": {
@@ -11,19 +11,21 @@
     "observation_mode": "catalog-watch",
     "verdict": "go",
     "note": "CKAN proprio di Consip (dati.consip.it, 16 package al 2026-10-28). I dataset del repo consumano /download/dataset/ sullo stesso portale. Baseline centrale 17 package (2026-04-10, reliability medium): il catalog-watch per-repo rende visibile quel delta.",
-    "last_probed": "2026-11-02"
+    "last_probed": "2026-11-09"
   },
   "health": {
     "radar_status": "GREEN",
     "http_code": "200",
     "note": null,
     "ssl_fallback": false,
-    "streak": 2
+    "streak": 3
   },
   "inventory": {
     "total_items": 16,
+    "active_items": 16,
+    "stale_items": 0,
     "method": null,
-    "captured_at": "2026-11-02T12:34:59+00:00",
+    "captured_at": "2026-11-09T12:59:12+00:00",
     "baseline_value": null,
     "baseline_date": null,
     "freshness_hours": 0.0,
@@ -35,7 +37,7 @@
     }
   },
   "source_check": {
-    "last_run": "2026-11-02T12:37:25Z",
+    "last_run": "2026-11-09T12:59:30Z",
     "total_scored": 16,
     "reachable": 16,
     "csv_count": 16,
@@ -93,10 +95,16 @@
         "reachable": true
       }
     ],
+    "not_checked_non_csv": 0,
+    "blocked_items": 0,
+    "validation_skipped": 0,
+    "catalog_only": false,
+    "probeable_items": 16,
+    "reachability_pct": 100.0,
     "coverage_pct": 100.0,
     "formato_aperto": {
-      "score": 5.0,
-      "perc_aperto": 0.0,
+      "score": 90.0,
+      "perc_aperto": 100.0,
       "perc_reachable": 100.0,
       "total": 16,
       "fonte": "source_check"
@@ -279,14 +287,8 @@
   "catalog_schema_version": 1,
   "referenced_items": {
     "checked": 24,
-    "matched": 23,
+    "matched": 24,
     "missing": [],
-    "unknown": [
-      {
-        "slug": "consip_amministrazioni",
-        "kind": "url",
-        "id": "https://dati.consip.it/download/dataset/amministrazioni2024.csv"
-      }
-    ]
+    "unknown": []
   }
 }
