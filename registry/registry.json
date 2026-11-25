@@ -1,19 +1,17 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "repo": "open-consip",
   "source_repo": "dataciviclab/open-consip",
-  "updated_at": "2026-11-07",
+  "updated_at": "2026-11-25",
+  "gcs": {
+    "clean": "year",
+    "prefix": "open-consip/"
+  },
   "datasets": [
     {
       "slug": "consip_amministrazioni",
       "name": "Consip Amministrazioni",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -22,105 +20,95 @@
         "support"
       ],
       "category": "pa",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 24960,
+        "2025": 25338,
+        "2026": 25515
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "identificativo_amministrazione",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "identificativo_ipa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipologia_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "codice_fiscale",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "fiscal_code"
         },
         {
           "name": "denominazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "region_code"
         },
         {
           "name": "provincia",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "province_code"
         },
         {
           "name": "comune",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "municipality_name"
         },
         {
           "name": "latitudine",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "longitudine",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_po_attivi",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_amministrazioni/*/consip_amministrazioni_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_amministrazioni__mart_pa_per_territorio"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T11:58:15.719728+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_bandi_e_gare",
       "name": "Consip Bandi E Gare",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -129,210 +117,182 @@
         "appalti"
       ],
       "category": "appalti",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 1823,
+        "2025": 1938,
+        "2026": 1854
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "denominazione_bando",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "identificativo_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipologia_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "categoria_merceologica",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipo_strumento",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipo_procedura",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "modalita_svolgimento",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "aggiudicazione_esclusiva",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "verde",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "criterio_aggiudicazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_pubblicazione",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_aggiudicazione",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_attivazione",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_autorizzazione_6_5",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_autorizzazione_7_5",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_termine",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "base_asta",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "importo_massimale",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "quantita_massimale",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "unita_misura",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "unita_misura_del_massimale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "percentuale_erosione",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_operatori_economici_partecipanti",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_operatori_economici_aggiudicatari_abilitati",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "commissione_sul_valore_degli_acquisti",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "flag_obbligatoria_facoltativa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "flag_procedura_accelerata",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "flag_rilancio_competitivo",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_bandi_e_gare/*/consip_bandi_e_gare_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_bandi_e_gare__mart_bandi_per_strumento",
         "consip_bandi_e_gare__mart_competizione_strumento"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:00:28.565306+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_cataloghi",
       "name": "Consip Cataloghi",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -341,107 +301,97 @@
         "cpv"
       ],
       "category": "finanza-pubblica",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 711073,
+        "2025": 494745,
+        "2026": 279476
+      },
       "columns": [
         {
           "name": "denominazione_iniziativa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "identificativo_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipo_strumento",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "prodotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "codice_cpv",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "cpv_code"
         },
         {
           "name": "descrizione_cpv",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipo_prodotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "categoria_merceologica",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "descrizione_dettaglio",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "principale_accessorio",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "articolo_disp_mese",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "articolo_disp_anno",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_cataloghi/*/consip_cataloghi_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_cataloghi__mart_cataloghi_per_categoria"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:09:49.006535+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_composto",
       "name": "Consip Composto",
       "description": "Compose CONSIP: snapshot unificato anno × regione da tutti i dataset Consip.",
-      "source": "",
       "source_id": "dataciviclab_composite",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -449,174 +399,143 @@
         "cross"
       ],
       "category": "finanza-pubblica",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
       "columns": [
         {
           "name": "anno",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "regione",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "region_code"
         },
         {
           "name": "n_gare",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_aggiudicate",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "tasso_aggiudicazione",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "base_asta_totale",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "valore_aggiudicato_totale",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "incidenza_prezzo",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "fornitori_medi_asp",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_contratti_mepa",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "valore_contratti_mepa",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "fornitori_medi_mepa",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "tempi_medi_stipula",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_imprese_totali",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_imprese_con_agg",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_imprese_con_contratti",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "tot_aggiudicazioni",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "spesa_utility",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "ordini_utility",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "spesa_ordini",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_ordini_totali",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_pa_con_ordini",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_pa_totali",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_po_totali",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open_consip/consip_composto/*/consip_composto_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_composto__mart_riepilogo"
-      ]
+      ],
+      "location": "gs://dataciviclab-clean/open_consip/consip_composto/*/consip_composto_*_clean.parquet"
     },
     {
       "slug": "consip_consumi_convenzione",
       "name": "Consip Consumi Convenzione",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -624,102 +543,92 @@
         "convenzione"
       ],
       "category": "finanza-pubblica",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 8048,
+        "2025": 7115,
+        "2026": 6208
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "tipologia_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "provincia_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "sigla_provincia_pa",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "province_code"
         },
         {
           "name": "regione_fornitore",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "convenzione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "valore_economico_consumi",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_ordini_con_consumi",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_pa_con_consumi",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_po_con_consumi",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_consumi_convenzione/*/consip_consumi_convenzione_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_consumi_convenzione__mart_spesa_per_territorio"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:16:07.229270+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_gare_asp",
       "name": "Consip Gare Asp",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -729,180 +638,157 @@
         "geolocalizzato"
       ],
       "category": "appalti",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 15930,
+        "2025": 19590,
+        "2026": 21907
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "comparto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipologia_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_gara",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "stato_gara",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "stato_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "identificativo_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "categoria_merceologica",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipo_procedura",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "oggetto_appalto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "criterio_aggiudicazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "provincia_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "sigla_prov_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_pubblicazione",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_aggiudicazione",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "base_asta",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "valore_aggiudicato",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "durata_contratto_presunta",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "durata_contratto_stipula",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_fornitori_partecipanti",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "latitudine_pa",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "longitudine_pa",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_gare_asp/*/consip_gare_asp_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_gare_asp__mart_gare_per_territorio",
         "consip_gare_asp__mart_esito_gare_provincia"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:18:23.935400+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_operatori_economici",
       "name": "Consip Operatori Economici",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -910,121 +796,108 @@
         "operatori-economici"
       ],
       "category": "economia",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 243744,
+        "2025": 294618,
+        "2026": 321290
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "partita_iva",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "fiscal_code"
         },
         {
           "name": "ragione_sociale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "forma_societaria",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "nazione_sede_legale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_sede_legale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "provincia_sede_legale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "comune_sede_legale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "indirizzo_sede_legale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "latitudine_sede_legale",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "longitudine_sede_legale",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_aggiudicazioni",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_abilitazioni",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_transazioni",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "numero_contratti_attivi",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_operatori_economici/*/consip_operatori_economici_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_operatori_economici__mart_imprese_per_territorio",
         "consip_operatori_economici__mart_concentrazione_imprese"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:24:43.621446+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_ordini_convenzione",
       "name": "Consip Ordini Convenzione",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -1033,127 +906,113 @@
         "spesa"
       ],
       "category": "finanza-pubblica",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 20578,
+        "2025": 17853,
+        "2026": 13181
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "tipologia_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "provincia_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "sigla_provincia_pa",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "province_code"
         },
         {
           "name": "regione_fornitore",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "convenzione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "bene_servizio",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "codice_cpv",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "cpv_code"
         },
         {
           "name": "descrizione_cpv",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "n_ordini",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "importo_ordinato",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_pa",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_fornitori",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_po",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_ordini_convenzione/*/consip_ordini_convenzione_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_ordini_convenzione__mart_spesa_per_convenzione"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:29:36.903374+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_ordini_mepa",
       "name": "Consip Ordini Mepa",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -1162,128 +1021,114 @@
         "spesa"
       ],
       "category": "finanza-pubblica",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 124556,
+        "2025": 119195,
+        "2026": 83908
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "tipologia_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "provincia_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "sigla_provincia_pa",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "province_code"
         },
         {
           "name": "regione_fornitore",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "bando_mepa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "categoria_abilitazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "bene_servizio",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "codice_cpv",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "cpv_code"
         },
         {
           "name": "descrizione_cpv",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "n_ordini",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "valore_ordini",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_pa",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_fornitori",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_po",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_ordini_mepa/*/consip_ordini_mepa_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_ordini_mepa__mart_ordini_mepa_per_bene",
         "consip_ordini_mepa__mart_ordini_mepa_per_regione"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T12:33:30.897319+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_partecipazioni",
       "name": "Consip Partecipazioni",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -1292,108 +1137,97 @@
         "partecipazioni"
       ],
       "category": "appalti",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 811313,
+        "2025": 955039,
+        "2026": 1039750
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "denominazione_iniziativa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "identificativo_lotto",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "tipo_strumento",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "partita_iva",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "fiscal_code"
         },
         {
           "name": "ragione_sociale",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "forma_partecipazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "denominazione_partecipazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "progressivo_partecipante",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "flag_capogruppo",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "esito_partecipazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "data_aggiudicazione",
           "type": "DATE",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_partecipazioni/*/consip_partecipazioni_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_partecipazioni__mart_vincitori_per_strumento"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T13:02:47.913452+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     },
     {
       "slug": "consip_rdo_td_stipulate",
       "name": "Consip Rdo Td Stipulate",
-      "description": "",
-      "source": "",
       "source_id": "consip_open_data",
-      "period": {
-        "start": 2024,
-        "end": 2026
-      },
       "tags": [
         "finanza-pubblica",
         "consip",
@@ -1403,127 +1237,117 @@
         "competizione"
       ],
       "category": "appalti",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "partitions": {
+        "2024": 17956,
+        "2025": 18364,
+        "2026": 14571
+      },
       "columns": [
         {
           "name": "anno_riferimento",
           "type": "INTEGER",
           "role": "dimension",
-          "description": "",
           "semantic_type": "year"
         },
         {
           "name": "tipologia_amministrazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_fornitore",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "regione_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "provincia_pa",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "sigla_provincia_pa",
           "type": "VARCHAR",
           "role": "dimension",
-          "description": "",
           "semantic_type": "province_code"
         },
         {
           "name": "tipo_negoziazione",
           "type": "VARCHAR",
-          "role": "dimension",
-          "description": ""
+          "role": "dimension"
         },
         {
           "name": "n_negoziazioni_stipulate",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_contratti_stipulati",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "valore_base_asta",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "perc_negoziazioni_base_asta_valorizzata",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "valore_contratti_stipulati",
           "type": "INTEGER",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_medio_fornitori_partecipanti",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_fornitori_con_contratti_stipulati",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_pa_appaltanti",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "n_po",
           "type": "BIGINT",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "durata_media_negoziazione",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         },
         {
           "name": "tempi_medi_stipula",
           "type": "DOUBLE",
-          "role": "metric",
-          "description": ""
+          "role": "metric"
         }
       ],
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-clean/open-consip/consip_rdo_td_stipulate/*/consip_rdo_td_stipulate_*_clean.parquet",
-        "multi_file": true
-      },
-      "stage": "incubating",
       "mart_refs": [
         "consip_rdo_td_stipulate__mart_competizione_mepa"
-      ]
+      ],
+      "last_run": {
+        "at": "2026-11-25T13:20:20.737702+00:00",
+        "year": 2026,
+        "status": "SUCCESS"
+      }
     }
   ],
   "marts": [
@@ -1531,685 +1355,171 @@
       "slug": "consip_amministrazioni__mart_pa_per_territorio",
       "dataset": "consip_amministrazioni",
       "table": "mart_pa_per_territorio",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_amministrazioni/*/mart_pa_per_territorio.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione",
+        "tipologia_amministrazione"
+      ]
     },
     {
       "slug": "consip_anac_imprese__mart_analisi_mercato",
       "dataset": "consip_anac_imprese",
       "table": "mart_analisi_mercato",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_anac_imprese/2026/mart_analisi_mercato.parquet",
-        "multi_file": false
-      }
+      "layout": "year",
+      "year": 2026
     },
     {
       "slug": "consip_anac_imprese__mart_imprese_dual_use",
       "dataset": "consip_anac_imprese",
       "table": "mart_imprese_dual_use",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_anac_imprese/2026/mart_imprese_dual_use.parquet",
-        "multi_file": false
-      }
+      "layout": "year",
+      "year": 2026
     },
     {
       "slug": "consip_bandi_e_gare__mart_bandi_per_strumento",
       "dataset": "consip_bandi_e_gare",
       "table": "mart_bandi_per_strumento",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/*/mart_bandi_per_strumento.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "tipo_strumento",
+        "criterio_aggiudicazione"
+      ]
     },
     {
       "slug": "consip_bandi_e_gare__mart_competizione_strumento",
       "dataset": "consip_bandi_e_gare",
       "table": "mart_competizione_strumento",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_bandi_e_gare/*/mart_competizione_strumento.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "tipo_strumento",
+        "criterio_aggiudicazione"
+      ]
     },
     {
       "slug": "consip_cataloghi__mart_cataloghi_per_categoria",
       "dataset": "consip_cataloghi",
       "table": "mart_cataloghi_per_categoria",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_cataloghi/*/mart_cataloghi_per_categoria.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "tipo_strumento",
+        "categoria_merceologica"
+      ]
     },
     {
       "slug": "consip_consumi_convenzione__mart_spesa_per_territorio",
       "dataset": "consip_consumi_convenzione",
       "table": "mart_spesa_per_territorio",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_consumi_convenzione/*/mart_spesa_per_territorio.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_pa",
+        "provincia_pa",
+        "tipologia_amministrazione",
+        "regione_fornitore"
+      ]
     },
     {
       "slug": "consip_gare_asp__mart_esito_gare_provincia",
       "dataset": "consip_gare_asp",
       "table": "mart_esito_gare_provincia",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/*/mart_esito_gare_provincia.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_pa",
+        "provincia_pa",
+        "stato_gara"
+      ]
     },
     {
       "slug": "consip_gare_asp__mart_gare_per_territorio",
       "dataset": "consip_gare_asp",
       "table": "mart_gare_per_territorio",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_gare_asp/*/mart_gare_per_territorio.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_pa",
+        "provincia_pa",
+        "stato_gara"
+      ]
     },
     {
       "slug": "consip_operatori_economici__mart_concentrazione_imprese",
       "dataset": "consip_operatori_economici",
       "table": "mart_concentrazione_imprese",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/*/mart_concentrazione_imprese.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_sede_legale",
+        "forma_societaria"
+      ]
     },
     {
       "slug": "consip_operatori_economici__mart_imprese_per_territorio",
       "dataset": "consip_operatori_economici",
       "table": "mart_imprese_per_territorio",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_operatori_economici/*/mart_imprese_per_territorio.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_sede_legale",
+        "forma_societaria"
+      ]
     },
     {
       "slug": "consip_ordini_convenzione__mart_spesa_per_convenzione",
       "dataset": "consip_ordini_convenzione",
       "table": "mart_spesa_per_convenzione",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_convenzione/*/mart_spesa_per_convenzione.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "convenzione"
+      ]
     },
     {
       "slug": "consip_ordini_mepa__mart_ordini_mepa_per_bene",
       "dataset": "consip_ordini_mepa",
       "table": "mart_ordini_mepa_per_bene",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/*/mart_ordini_mepa_per_bene.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "bando_mepa"
+      ]
     },
     {
       "slug": "consip_ordini_mepa__mart_ordini_mepa_per_regione",
       "dataset": "consip_ordini_mepa",
       "table": "mart_ordini_mepa_per_regione",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_ordini_mepa/*/mart_ordini_mepa_per_regione.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_pa"
+      ]
     },
     {
       "slug": "consip_partecipazioni__mart_vincitori_per_strumento",
       "dataset": "consip_partecipazioni",
       "table": "mart_vincitori_per_strumento",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_partecipazioni/*/mart_vincitori_per_strumento.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "tipo_strumento",
+        "esito_partecipazione"
+      ]
     },
     {
       "slug": "consip_rdo_td_stipulate__mart_competizione_mepa",
       "dataset": "consip_rdo_td_stipulate",
       "table": "mart_competizione_mepa",
-      "location": {
-        "type": "gcs",
-        "path": "gs://dataciviclab-mart/open-consip/consip_rdo_td_stipulate/*/mart_competizione_mepa.parquet",
-        "multi_file": true
-      }
+      "layout": "glob",
+      "primary_key": [
+        "anno_riferimento",
+        "regione_pa",
+        "tipo_negoziazione"
+      ]
     }
   ],
-  "signals": [
-    {
-      "id": "compose:consip_anac_imprese",
-      "source_id": "dataciviclab_composite",
-      "status": "ok",
-      "label": "consip_anac_imprese",
-      "detail": "anno 2026 — mart: si",
-      "action": ""
-    },
-    {
-      "id": "consip_amministrazioni",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_amministrazioni",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T224334Z_0cff8753",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 25515,
-          "clean": 25515,
-          "mart": 405
-        },
-        "output_bytes": {
-          "raw": 4030111,
-          "clean": 893341,
-          "mart": 9639
-        },
-        "started_at": "2026-11-06T22:43:34.955594+00:00",
-        "finished_at": "2026-11-06T22:44:50.297321+00:00",
-        "duration_seconds": 75.342
-      }
-    },
-    {
-      "id": "consip_bandi_e_gare",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_bandi_e_gare",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T224742Z_69db76de",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 1854,
-          "clean": 1854,
-          "mart": 14
-        },
-        "output_bytes": {
-          "raw": 545683,
-          "clean": 66998,
-          "mart": 3346
-        },
-        "started_at": "2026-11-06T22:47:42.194228+00:00",
-        "finished_at": "2026-11-06T22:47:45.942699+00:00",
-        "duration_seconds": 3.748
-      }
-    },
-    {
-      "id": "consip_cataloghi",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_cataloghi",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T230139Z_940416a3",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 310960,
-          "clean": 279476,
-          "mart": 24
-        },
-        "output_bytes": {
-          "raw": 70310042,
-          "clean": 130157,
-          "mart": 1752
-        },
-        "started_at": "2026-11-06T23:01:39.642600+00:00",
-        "finished_at": "2026-11-06T23:04:35.737033+00:00",
-        "duration_seconds": 176.094
-      }
-    },
-    {
-      "id": "consip_consumi_convenzione",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_consumi_convenzione",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T230605Z_a8a34a8a",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 6208,
-          "clean": 6208,
-          "mart": 3605
-        },
-        "output_bytes": {
-          "raw": 949422,
-          "clean": 70875,
-          "mart": 35795
-        },
-        "started_at": "2026-11-06T23:06:05.099371+00:00",
-        "finished_at": "2026-11-06T23:06:06.737698+00:00",
-        "duration_seconds": 1.638
-      }
-    },
-    {
-      "id": "consip_gare_asp",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_gare_asp",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T231028Z_0bd38c09",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 21927,
-          "clean": 21907,
-          "mart": 570
-        },
-        "output_bytes": {
-          "raw": 13211098,
-          "clean": 1449301,
-          "mart": 22816
-        },
-        "started_at": "2026-11-06T23:10:28.853140+00:00",
-        "finished_at": "2026-11-06T23:13:45.829457+00:00",
-        "duration_seconds": 196.976
-      }
-    },
-    {
-      "id": "consip_operatori_economici",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_operatori_economici",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T231950Z_881c3fc7",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 321306,
-          "clean": 321290,
-          "mart": 968
-        },
-        "output_bytes": {
-          "raw": 58066531,
-          "clean": 12255098,
-          "mart": 24579
-        },
-        "started_at": "2026-11-06T23:19:50.587644+00:00",
-        "finished_at": "2026-11-06T23:21:11.715808+00:00",
-        "duration_seconds": 81.128
-      }
-    },
-    {
-      "id": "consip_ordini_convenzione",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_ordini_convenzione",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T232309Z_3704dac8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 13181,
-          "clean": 13181,
-          "mart": 18
-        },
-        "output_bytes": {
-          "raw": 2655132,
-          "clean": 83726,
-          "mart": 1681
-        },
-        "started_at": "2026-11-06T23:23:09.220649+00:00",
-        "finished_at": "2026-11-06T23:23:25.667230+00:00",
-        "duration_seconds": 16.447
-      }
-    },
-    {
-      "id": "consip_ordini_mepa",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_ordini_mepa",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T233313Z_a97e8226",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 83908,
-          "clean": 83908,
-          "mart": 22
-        },
-        "output_bytes": {
-          "raw": 13862435,
-          "clean": 595969,
-          "mart": 1692
-        },
-        "started_at": "2026-11-06T23:33:13.581762+00:00",
-        "finished_at": "2026-11-06T23:35:55.917124+00:00",
-        "duration_seconds": 162.335
-      }
-    },
-    {
-      "id": "consip_partecipazioni",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_partecipazioni",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261106T235633Z_a92c7f6a",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 1080539,
-          "clean": 1039750,
-          "mart": 8
-        },
-        "output_bytes": {
-          "raw": 211966074,
-          "clean": 25516318,
-          "mart": 1343
-        },
-        "started_at": "2026-11-06T23:56:33.390934+00:00",
-        "finished_at": "2026-11-07T00:09:30.791047+00:00",
-        "duration_seconds": 777.4
-      }
-    },
-    {
-      "id": "consip_rdo_td_stipulate",
-      "source_id": "consip_open_data",
-      "status": "ok",
-      "label": "consip_rdo_td_stipulate",
-      "detail": "anni 2024-2026 — mart: si",
-      "action": "",
-      "run": {
-        "run_id": "20261107T000942Z_81c8bbe8",
-        "year": 2026,
-        "status": "SUCCESS",
-        "quality_score": {
-          "raw": 100,
-          "clean": 100,
-          "mart": 100
-        },
-        "output_rows": {
-          "raw": 14571,
-          "clean": 14571,
-          "mart": 40
-        },
-        "output_bytes": {
-          "raw": 2053507,
-          "clean": 216122,
-          "mart": 2857
-        },
-        "started_at": "2026-11-07T00:09:42.833898+00:00",
-        "finished_at": "2026-11-07T00:11:46.498396+00:00",
-        "duration_seconds": 123.664
-      }
-    }
-  ],
-  "codelists": [],
-  "entities": {
-    "entities": {
-      "Categoria merceologica": {
-        "entity": "Categoria merceologica",
-        "label": "Categoria merceologica",
-        "datasets": [
-          {
-            "slug": "consip_cataloghi",
-            "name": "Consip Cataloghi",
-            "column": "codice_cpv",
-            "semantic_type": "cpv_code"
-          },
-          {
-            "slug": "consip_ordini_convenzione",
-            "name": "Consip Ordini Convenzione",
-            "column": "codice_cpv",
-            "semantic_type": "cpv_code"
-          },
-          {
-            "slug": "consip_ordini_mepa",
-            "name": "Consip Ordini Mepa",
-            "column": "codice_cpv",
-            "semantic_type": "cpv_code"
-          }
-        ],
-        "types": {
-          "cpv_code": 3
-        }
-      },
-      "Comune": {
-        "entity": "Comune",
-        "label": "Comune (ISTAT)",
-        "datasets": [
-          {
-            "slug": "consip_amministrazioni",
-            "name": "Consip Amministrazioni",
-            "column": "comune",
-            "semantic_type": "municipality_name"
-          }
-        ],
-        "types": {
-          "municipality_name": 1
-        }
-      },
-      "Ente (o Impresa)": {
-        "entity": "Ente (o Impresa)",
-        "label": "Ente (o Impresa)",
-        "datasets": [
-          {
-            "slug": "consip_amministrazioni",
-            "name": "Consip Amministrazioni",
-            "column": "codice_fiscale",
-            "semantic_type": "fiscal_code"
-          },
-          {
-            "slug": "consip_operatori_economici",
-            "name": "Consip Operatori Economici",
-            "column": "partita_iva",
-            "semantic_type": "fiscal_code"
-          },
-          {
-            "slug": "consip_partecipazioni",
-            "name": "Consip Partecipazioni",
-            "column": "partita_iva",
-            "semantic_type": "fiscal_code"
-          }
-        ],
-        "types": {
-          "fiscal_code": 3
-        }
-      },
-      "Provincia": {
-        "entity": "Provincia",
-        "label": "Provincia",
-        "datasets": [
-          {
-            "slug": "consip_amministrazioni",
-            "name": "Consip Amministrazioni",
-            "column": "provincia",
-            "semantic_type": "province_code"
-          },
-          {
-            "slug": "consip_consumi_convenzione",
-            "name": "Consip Consumi Convenzione",
-            "column": "sigla_provincia_pa",
-            "semantic_type": "province_code"
-          },
-          {
-            "slug": "consip_ordini_convenzione",
-            "name": "Consip Ordini Convenzione",
-            "column": "sigla_provincia_pa",
-            "semantic_type": "province_code"
-          },
-          {
-            "slug": "consip_ordini_mepa",
-            "name": "Consip Ordini Mepa",
-            "column": "sigla_provincia_pa",
-            "semantic_type": "province_code"
-          },
-          {
-            "slug": "consip_rdo_td_stipulate",
-            "name": "Consip Rdo Td Stipulate",
-            "column": "sigla_provincia_pa",
-            "semantic_type": "province_code"
-          }
-        ],
-        "types": {
-          "province_code": 5
-        }
-      },
-      "Regione": {
-        "entity": "Regione",
-        "label": "Regione",
-        "datasets": [
-          {
-            "slug": "consip_amministrazioni",
-            "name": "Consip Amministrazioni",
-            "column": "regione",
-            "semantic_type": "region_code"
-          },
-          {
-            "slug": "consip_composto",
-            "name": "Consip Composto",
-            "column": "regione",
-            "semantic_type": "region_code"
-          }
-        ],
-        "types": {
-          "region_code": 2
-        }
-      },
-      "Tempo": {
-        "entity": "Tempo",
-        "label": "Tempo / data",
-        "datasets": [
-          {
-            "slug": "consip_amministrazioni",
-            "name": "Consip Amministrazioni",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_bandi_e_gare",
-            "name": "Consip Bandi E Gare",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_composto",
-            "name": "Consip Composto",
-            "column": "anno",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_consumi_convenzione",
-            "name": "Consip Consumi Convenzione",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_gare_asp",
-            "name": "Consip Gare Asp",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_operatori_economici",
-            "name": "Consip Operatori Economici",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_ordini_convenzione",
-            "name": "Consip Ordini Convenzione",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_ordini_mepa",
-            "name": "Consip Ordini Mepa",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_partecipazioni",
-            "name": "Consip Partecipazioni",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          },
-          {
-            "slug": "consip_rdo_td_stipulate",
-            "name": "Consip Rdo Td Stipulate",
-            "column": "anno_riferimento",
-            "semantic_type": "year"
-          }
-        ],
-        "types": {
-          "year": 10
-        }
-      }
-    },
-    "bridges": []
-  }
+  "checks": [],
+  "codelists": []
 }
